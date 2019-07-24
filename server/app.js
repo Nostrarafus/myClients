@@ -32,6 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'hbs');
+
 app.use(cors({
   credentials: true,
   origin: ['http://localhost:3000']
