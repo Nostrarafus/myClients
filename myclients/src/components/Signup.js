@@ -5,7 +5,10 @@ import AuthServices from '../services/Services'
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { 
+      username: '',
+       password: ''
+      };
     this.service = new AuthServices();
   }
 
@@ -44,7 +47,7 @@ export default class Signup extends Component {
           <input type="text" name="username" value={this.state.username} onChange={e => this.handleChange(e)} />
 
           <label>Password:</label>
-          <textarea name="password" value={this.state.password} onChange={e => this.handleChange(e)} />
+          <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)} />
 
           <input type="submit" value="Signup" />
         </form>
