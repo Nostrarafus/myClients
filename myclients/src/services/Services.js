@@ -9,6 +9,12 @@ export default class AuthServices {
  
   }
 
+  addClient = (clientName) => {
+    console.log(clientName)
+    return this.service.post('/index/addClient', {clientName})
+    .then(response => response.data )
+  }
+
   signup = (username, password) => {
     return this.service.post('/auth/signup', {username, password})
     .then(response => response.data)
