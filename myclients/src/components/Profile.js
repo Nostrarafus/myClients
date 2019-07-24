@@ -1,30 +1,19 @@
 import React, { Component } from 'react'
 import AuthServices from '../services/Services';
+import Clientview from './ClientView';
+import { Link } from 'react-router-dom';
 
 export default class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
       addClient: "",
-      allClients: []
+      allClients: [],
     }
     this.service = new AuthServices();
   }
 
   componentDidMount() {
-    this.service.showAllClients()
-      .then(allClients => {
-        const names = allClients.map(client => client.clientName)
-        this.setState({
-          ...this.state,
-          allClients: names
-        });
-      })
-  }
-
-
-
-  showAllClients = () => {
     this.service.showAllClients()
       .then(allClients => {
         this.setState({
@@ -40,8 +29,11 @@ export default class Profile extends Component {
 
     this.service.addClient(clientName)
       .then(response => {
+        console.log(response)
         this.setState({
+          ...this.state,
           addClient: "",
+          allClients: response,
         });
       })
       .catch(error => {
@@ -50,7 +42,6 @@ export default class Profile extends Component {
           error: true
         });
       })
-    this.showAllClients()
   }
 
   handleClientChange = (event) => {
@@ -59,6 +50,7 @@ export default class Profile extends Component {
   }
 
   render() {
+    console.log(this.state.allClients)
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>
@@ -66,12 +58,16 @@ export default class Profile extends Component {
         <h2>Add a new client:</h2>
         <form onSubmit={this.handleFormSubmit}>
           <input type="text" name="addClient" value={this.state.addClient} onChange={(e) => this.handleClientChange(e)} />
-          <input type="submit" value="Add Client" />
+          <input type="submit" value="Add Client" onClick={this.showAllClients} />
         </form>
         <ol className="clientsList">
           {
-            this.state.allClients.map((client,idx)=>{
-              return <li key={idx}>{client}</li>
+            this.state.allClients.map((client, idx) => {
+              return <li key={idx}>
+                <Link to={`/client/` + client._id}>
+                  <Clientview nombre={client.clientName} identificador={client._id} />
+                </Link>
+              </li>
             })
           }
         </ol>

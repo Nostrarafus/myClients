@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import AuthServices from './services/Services';
 import Home from './components/Home';
+import Client from './components/Client';
 
 class App extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class App extends Component {
             <Route exact path='/' render={() => { return <Redirect to="/profile" /> }} />
             <Route exact path='/login' render={() => { return <Redirect to="/profile" /> }} />
             <Route exact path='/profile' render={() => <Profile {...this.state.loggedInUser} logout={this.logout} />} />
+            <Route exact path='/client/:id' component={Client} />
           </Switch>
         </React.Fragment>
       );

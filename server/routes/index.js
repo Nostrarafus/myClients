@@ -15,7 +15,10 @@ router.post('/addClient', (req, res, next) => {
   })
     .then((client) => {
       User.findByIdAndUpdate(currentuser, { $push: { clients: client._id } }, { new: true })
-        .then((allClients) => { res.json(allClients) })
+        .then((x) => {
+          Client.find({})
+            .then((allClients) => { res.json(allClients) })
+        })
     })
     .catch(err => console.log("Hubo un error!", err))
 })
@@ -27,7 +30,6 @@ router.get('/allClients', (req, res, next) => {
     .catch(err => console.log("Hubo un error!", err))
 });
 
-//{ res.json(allClients) })
-
+//.then((allClients) => { res.json(allClients) })
 
 module.exports = router;
