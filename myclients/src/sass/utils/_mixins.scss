@@ -1,0 +1,72 @@
+%animatable {
+    transition: all 1.25s;
+}
+
+@mixin squarify($thickness) {
+    $myPadding: 20px;
+
+    border: $thickness solid green;
+    padding: $myPadding;
+    margin: 20px;
+    font-family: $font-standard;
+}
+
+@mixin animatable() {
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+}
+
+.fancyButton,
+.div-test,
+.button-1 {
+    transition: all 1.25s;
+}
+
+/////
+
+.fancyButton {
+    // @extend %animatable;
+    // @include animatable();
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+}
+
+
+.div-test {
+    //@extend %animatable;
+    // @include animatable();
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+}
+
+
+.button-1 {
+    // @extend %animatable;
+    // @include animatable();
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+    transition: all 1.25s;
+}
