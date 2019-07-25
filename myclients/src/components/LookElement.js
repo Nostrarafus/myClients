@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export default class OutlookElement {
+export default class LookElement {
     constructor(_id, description, timestamp) {
         this._id = _id
         this.description = description;

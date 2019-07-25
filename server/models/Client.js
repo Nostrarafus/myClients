@@ -7,7 +7,8 @@ const clientSchema = new Schema({
   picture: {
     imgName: String,
     imgPath: String,
-  },  
+  }, 
+  looks: [{ type: Schema.Types.ObjectId, ref: "Looks" }],
 }, {
   timestamps: {
     createdAt: 'created_at',

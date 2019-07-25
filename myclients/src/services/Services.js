@@ -20,6 +20,31 @@ export default class AuthServices {
 
   }
 
+  
+  signup = (username, password) => {
+    return this.service.post('/auth/signup', { username, password })
+    .then(response => response.data)
+    .catch(errHandler);
+  }
+  
+  login = (username, password) => {
+    return this.service.post('/auth/login', { username, password })
+    .then(response => response.data)
+    .catch(errHandler);
+  }
+  
+  loggedin = () => {
+    return this.service.get('/auth/loggedin')
+    .then(response => response.data)
+    .catch(errHandler);
+  }
+  
+  logout = () => {
+    return this.service.get('/auth/logout')
+    .then(response => response.data)
+    .catch(errHandler);
+  }
+  
   addClient = (clientName) => {
     return this.service.post('/addClient', { clientName })
       .then(response => response.data)
@@ -32,30 +57,7 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-  signup = (username, password) => {
-    return this.service.post('/auth/signup', { username, password })
-      .then(response => response.data)
-      .catch(errHandler);
-  }
-
-  login = (username, password) => {
-    return this.service.post('/auth/login', { username, password })
-      .then(response => response.data)
-      .catch(errHandler);
-  }
-
-  loggedin = () => {
-    return this.service.get('/auth/loggedin')
-      .then(response => response.data)
-      .catch(errHandler);
-  }
-
-  logout = () => {
-    return this.service.get('/auth/logout')
-      .then(response => response.data)
-      .catch(errHandler);
-  }
-
+  
   getSingleClient = (clientID) => {
     return this.service.get(`/client/${clientID}`)
       .then(response => response.data)
