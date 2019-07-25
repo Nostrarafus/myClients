@@ -1,12 +1,15 @@
 @import "./base/reset";
-@import "./base/_typography";
+@import "./base/typography";
 
-@import "./utils/_colors";
-@import "./utils/_mixins";
+@import "./utils/colors";
+@import "./utils/mixins";
 
 @import "./components/Home";
+@import "./components/Profile";
+@import "./components/Login";
+@import "./components/Signup";
 
 
-@import "./pages/_App";
-@import "./pages/_index";
+@import "./pages/App";
+@import "./pages/index";
 

@@ -9,8 +9,12 @@ export default class Profile extends Component {
     this.state = {
       addClient: "",
       allClients: [],
+      userPhoto: {},
+      file: null,
+      userData: {},
     }
     this.service = new AuthServices();
+
   }
 
   componentDidMount() {
@@ -23,13 +27,23 @@ export default class Profile extends Component {
       })
   }
 
+  componentWillMount() {
+    this.service.getUserData()
+      .then(userData => {
+        this.setState({
+          ...this.state,
+          userData: userData
+        })
+      })
+  }
+
+
   handleFormSubmit = (event) => {
     event.preventDefault();
     const clientName = this.state.addClient;
 
     this.service.addClient(clientName)
       .then(response => {
-        console.log(response)
         this.setState({
           ...this.state,
           addClient: "",
@@ -49,28 +63,54 @@ export default class Profile extends Component {
     this.setState({ [name]: value });
   }
 
-  render() {
+  handlePhotoSubmit(e) {
+    e.preventDefault()
+    this.service.addUserPicture(this.state.file)
+  }
 
+
+
+
+  handlePhotoChange(e) {
+    console.log("archivos seleccionado")
+    console.log(e.target.files[0])
+
+    this.setState({
+      ...this.state,
+      file: e.target.files[0]
+    })
+  }
+
+  render() {
+    console.log(this.state.userData)
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>
-        <h1>Bienvenido {}</h1>
+        <h1>Bienvenido {this.state.userData.username}</h1>
         <h2>Add a new client:</h2>
         <form onSubmit={this.handleFormSubmit}>
           <input type="text" name="addClient" value={this.state.addClient} onChange={(e) => this.handleClientChange(e)} />
           <input type="submit" value="Add Client" onClick={this.showAllClients} />
         </form>
-        <ol className="clientsList">
+        <div className="clientsList">
           {
             this.state.allClients.map((client, idx) => {
-              return <li key={idx}>
+              return <div key={idx}>
                 <Link to={`/client/` + client._id}>
                   <Clientview nombre={client.clientName} identificador={client._id} />
                 </Link>
-              </li>
+              </div>
             })
           }
-        </ol>
+        </div>
+
+        <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
+          <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
+          <button type="submit">Update your profile pic</button>
+        </form>
+        <div className="userPic">
+          {(this.state.userData.picture) ? <img src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
+        </div>
       </div>
     )
   }

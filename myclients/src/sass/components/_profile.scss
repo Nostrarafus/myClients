@@ -1,0 +1,12 @@
+.clientsList{
+  display: flex;
+  flex-direction: row;
+}
+
+.userPic{
+  img {
+    max-height: 50px;
+    max-width: 50px;
+  }
+}
+
