@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuthServices from '../services/Services';
 import Clientview from './ClientView';
 import { Link } from 'react-router-dom';
+import ZoomImg from './ZoomImg'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -72,8 +73,8 @@ export default class Profile extends Component {
 
 
   handlePhotoChange(e) {
-    console.log("archivos seleccionado")
-    console.log(e.target.files[0])
+    // console.log("archivos seleccionado")
+    // console.log(e.target.files[0])
 
     this.setState({
       ...this.state,
@@ -82,7 +83,7 @@ export default class Profile extends Component {
   }
 
   render() {
-    console.log(this.state.userData)
+    //console.log(this.state.userData)
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>
@@ -109,7 +110,7 @@ export default class Profile extends Component {
           <button type="submit">Update your profile pic</button>
         </form>
         <div className="userPic">
-          {(this.state.userData.picture) ? <img src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
+          {(this.state.userData.picture) ? <ZoomImg className="userPic" src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
         </div>
       </div>
     )
