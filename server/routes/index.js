@@ -30,6 +30,15 @@ router.get('/allClients', (req, res, next) => {
     .catch(err => console.log("Hubo un error!", err))
 });
 
+
+router.get('/client/:id', (req, res, next) => {
+  console.log(req.params)
+  Client
+    .find({ _id: req.params.id })
+    .then((allClients) => { res.json(allClients) })
+    .catch(err => console.log("Hubo un error!", err))
+});
+
 //.then((allClients) => { res.json(allClients) })
 
 module.exports = router;

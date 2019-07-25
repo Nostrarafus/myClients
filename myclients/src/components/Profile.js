@@ -50,7 +50,7 @@ export default class Profile extends Component {
   }
 
   render() {
-    console.log(this.state.allClients)
+
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>

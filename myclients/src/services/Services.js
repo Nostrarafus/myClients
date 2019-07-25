@@ -39,4 +39,9 @@ export default class AuthServices {
       .then(response => response.data)
   }
 
+  getSingleClient = (clientID) => {
+    return this.service.get(`/client/${clientID}`)
+    .then(response => response.data)
+  }
+
 }
