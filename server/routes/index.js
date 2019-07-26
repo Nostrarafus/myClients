@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Client = require('../models/Client');
 const uploadCloud = require('../config/cloudinary.js');
+const Looks = require('../models/Looks')
 
 
 
@@ -21,6 +22,33 @@ router.post('/addClient', (req, res, next) => {
             .then((allClients) => { res.json(allClients) })
         })
     })
+    .catch(err => console.log("Hubo un error!", err))
+})
+
+router.post('/addLook', (req, res, next) => {
+  const currentuser = req.user._id
+  const look = req.body.newLook
+  const client = req.body.clientID
+  Looks.create({
+    client: client,
+    lookDescription: look,
+  })
+    .then((look) => {
+      console.log(look)
+      // Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
+      //   .then((x) => {
+      //     Client.find({})
+      //       .then((allClients) => { res.json(allClients) })
+      //   })
+    })
+    .catch(err => console.log("Hubo un error!", err))
+})
+
+router.get('/allLooks', (req, res, next) => {
+  const client = req.body.clientID
+  Client.findById(client)
+    .populate("looks")
+    .then((allLooks) => { res.json(allLooks) })
     .catch(err => console.log("Hubo un error!", err))
 })
 
@@ -52,7 +80,7 @@ router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
   console.log(req.file.url);
   User.findOneAndUpdate({ _id: req.user._id }, { $push: { picture: { imgName: imgName, imgPath: imgPath } } }, { new: true })
     .then(photo => {
-      res.json({url: req.file.url});
+      res.json({ url: req.file.url });
     })
     .catch(error => {
       console.log(error);

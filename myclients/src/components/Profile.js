@@ -4,6 +4,7 @@ import Clientview from './ClientView';
 import { Link } from 'react-router-dom';
 import ZoomImg from './ZoomImg'
 
+
 export default class Profile extends Component {
   constructor(props) {
     super(props)
@@ -110,8 +111,10 @@ export default class Profile extends Component {
           <button type="submit">Update your profile pic</button>
         </form>
         <div className="userPic">
-          {(this.state.userData.picture) ? <ZoomImg className="userPic" src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
+          {(this.state.userData.picture) ? <ZoomImg src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
         </div>
+
+        
       </div>
     )
   }

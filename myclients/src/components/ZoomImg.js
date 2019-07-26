@@ -24,13 +24,15 @@ const Image = posed.img({
     left: 0,
     bottom: 0,
     right: 0,
+    width: 600,
+    height: 600,
     flip: true,
     transition: transition
   },
   zoomedOut: {
     position: "static",
-    width: "auto",
-    height: "auto",
+    width: 200,
+    height: 200,
     flip: true,
     transition: transition
   }

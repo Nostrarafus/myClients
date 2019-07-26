@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import AuthServices from '../services/Services';
 import LookList from './LookList';
+import LookElement from './LookElement';
+
 
 export default class LookContainer extends Component {
   constructor(props) {
@@ -7,9 +10,36 @@ export default class LookContainer extends Component {
     this.state = {
       newLookDescription: "",
       newLookPic: "",
-      allLooks: []
+      allLooks: [],
+      clientData:{}
     }
+    this.service = new AuthServices();
+  }
+  componentDidMount() {
+    this.getLooks()
+     this.setState({
+          ...this.state,
+          clientData: this.props.clientData
+        })
+  }
 
+  getLooks() {
+    const clientID = this.props.clientData
+    console.log(clientID)
+    this.service.getLooks(clientID)
+      .then(allLooks => {
+        console.log(allLooks)
+        // if(allLooks !== undefined){
+        // allLooks = allLooks.data.map(look => {
+        //   return new LookElement(
+        //     look._id, look.description, look.timestamp,
+        //   )
+        // })
+        // this.setState({
+        //   ...this.state,
+        //   allLooks: allLooks
+        // })}
+      })
   }
 
   updateNewLookDescription(e) {
@@ -19,28 +49,31 @@ export default class LookContainer extends Component {
     })
   }
 
-  addNewTask(e) {
+  addNewLook(e) {
+    const newLook = this.state.newLookDescription
+    const clientID = this.props.clientData._id
+    console.log(clientID)
     if (e.key === 'Enter') {
-      this.service.addNewLook()
+      this.service.addNewLook(newLook, clientID)
         .then(createdLook => {
           let looksClonedArray = [...this.state.allLooks]
-          let createdLook = createdLook.data
-
-          tasksClonedArray.unshift(
-            new TaskElement(createdTask._id, createdTask.description, createdTask.timestamp, createdTask.favourited, createdTask.done)
+          createdLook = createdLook.data
+          looksClonedArray.unshift(
+            new LookElement(createdLook._id, createdLook.description, createdLook.timestamp)
           )
 
           this.setState({
             ...this.state,
-            tasks: looksClonedArray,
-            newTaskString: ""
+            looks: looksClonedArray,
+            newLookDescription: ""
           })
         })
     }
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props.clientData)
+    console.log(this.state.clientData)
     return (
       <section className="task-collection">
         <input type="text"

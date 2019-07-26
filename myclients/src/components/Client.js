@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import AuthServices from '../services/Services'
+import LookContainer from './LookContainer';
 
 export default class Client extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
+  constructor() {
+    super()
+    this.state = {
+      userData:{},
+      clientData: {}
+    }
     this.service = new AuthServices()
   }
 
@@ -19,19 +23,33 @@ export default class Client extends Component {
     this.service.getSingleClient(clientID)
       .then(response => {
         const theclient = response[0];
-        this.setState(theclient);
+        this.setState({
+          ...this.state,
+          clientData: theclient
+        });
       })
       .catch((err) => {
         console.log(err)
       })
   }
 
+  componentWillMount() {
+    this.service.getUserData()
+      .then(userData => {
+        this.setState({
+          ...this.state,
+          userData: userData
+        })
+      })
+  }
 
 
   render() {
+   // console.log(this.state.clientData)
     return (
       <div>
-        <h1>Aqui esta el perfil de: {this.state.clientName}</h1>
+        <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
+        <LookContainer clientData={this.state.clientData}></LookContainer>
       </div>
     )
   }
