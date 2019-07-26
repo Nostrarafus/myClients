@@ -7,7 +7,7 @@ export default class Client extends Component {
     super()
     this.state = {
       userData:{},
-      clientData: {}
+      clientData: null
     }
     this.service = new AuthServices()
   }
@@ -45,11 +45,17 @@ export default class Client extends Component {
 
 
   render() {
-   // console.log(this.state.clientData)
     return (
       <div>
+        {
+          (this.state.clientData)
+          ?
+          <React.Fragment>
         <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
         <LookContainer clientData={this.state.clientData}></LookContainer>
+        </React.Fragment>
+          :null
+          }
       </div>
     )
   }

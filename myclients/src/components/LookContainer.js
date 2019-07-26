@@ -11,34 +11,31 @@ export default class LookContainer extends Component {
       newLookDescription: "",
       newLookPic: "",
       allLooks: [],
-      clientData:{}
+      clientData: this.props.clientData
     }
     this.service = new AuthServices();
   }
   componentDidMount() {
     this.getLooks()
-     this.setState({
-          ...this.state,
-          clientData: this.props.clientData
-        })
+
   }
+
 
   getLooks() {
     const clientID = this.props.clientData
-    console.log(clientID)
     this.service.getLooks(clientID)
       .then(allLooks => {
         console.log(allLooks)
-        // if(allLooks !== undefined){
-        // allLooks = allLooks.data.map(look => {
-        //   return new LookElement(
-        //     look._id, look.description, look.timestamp,
-        //   )
-        // })
-        // this.setState({
-        //   ...this.state,
-        //   allLooks: allLooks
-        // })}
+        if(allLooks !== null){
+        allLooks = allLooks.data.map(look => {
+          return new LookElement(
+            look._id, look.description, look.timestamp,
+          )
+        })
+        this.setState({
+          ...this.state,
+          allLooks: allLooks
+        })}
       })
   }
 
@@ -52,7 +49,6 @@ export default class LookContainer extends Component {
   addNewLook(e) {
     const newLook = this.state.newLookDescription
     const clientID = this.props.clientData._id
-    console.log(clientID)
     if (e.key === 'Enter') {
       this.service.addNewLook(newLook, clientID)
         .then(createdLook => {
@@ -72,8 +68,8 @@ export default class LookContainer extends Component {
   }
 
   render() {
-    console.log(this.props.clientData)
-    console.log(this.state.clientData)
+    // console.log(this.props.clientData)
+      console.log(this.state.clientData)
     return (
       <section className="task-collection">
         <input type="text"
