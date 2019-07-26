@@ -18,37 +18,34 @@ router.post('/addClient', (req, res, next) => {
     .then((client) => {
       User.findOneAndUpdate({ _id: req.user._id }, { $push: { clients: client._id } }, { new: true })
         .then((x) => {
-          Client.find({})
+          Client.find({ owner: currentuser })
             .then((allClients) => { res.json(allClients) })
-        })
-    })
-    .catch(err => console.log("Hubo un error!", err))
+            .catch(err => console.log("Hubo un error!", err))
+        }).catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
 })
 
 router.post('/addLook', (req, res, next) => {
-  const currentuser = req.user._id
   const look = req.body.newLook
   const client = req.body.clientID
+  console.log(client)
   Looks.create({
     client: client,
     lookDescription: look,
   })
     .then((look) => {
-      console.log(look)
-      // Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
-      //   .then((x) => {
-      //     Client.find({})
-      //       .then((allClients) => { res.json(allClients) })
-      //   })
-    })
-    .catch(err => console.log("Hubo un error!", err))
+      let sentLook = look
+      Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
+        .then((clientLooks) => { res.json(sentLook) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
 })
 
 router.get('/allLooks', (req, res, next) => {
   const client = req.body.clientID
   Client.findById(client)
     .populate("looks")
-    .then((allLooks) => { res.json(allLooks) })
+    .then((allLooks) => { res.json(allLooks), console.log(allLooks) })
     .catch(err => console.log("Hubo un error!", err))
 })
 
@@ -67,7 +64,6 @@ router.get('/user', (req, res, next) => {
 });
 
 router.get('/client/:id', (req, res, next) => {
-  console.log(req.params)
   Client
     .find({ _id: req.params.id })
     .then((allClients) => { res.json(allClients) })
@@ -77,7 +73,6 @@ router.get('/client/:id', (req, res, next) => {
 router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
   const imgName = req.user.username
   const imgPath = req.file.url
-  console.log(req.file.url);
   User.findOneAndUpdate({ _id: req.user._id }, { $push: { picture: { imgName: imgName, imgPath: imgPath } } }, { new: true })
     .then(photo => {
       res.json({ url: req.file.url });

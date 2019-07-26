@@ -22,12 +22,12 @@ export default class LookContainer extends Component {
 
 
   getLooks() {
-    const clientID = this.props.clientData
+    const clientID = this.props.clientData._id
     this.service.getLooks(clientID)
       .then(allLooks => {
         console.log(allLooks)
         if(allLooks !== null){
-        allLooks = allLooks.data.map(look => {
+        allLooks = allLooks.map(look => {
           return new LookElement(
             look._id, look.description, look.timestamp,
           )
@@ -48,12 +48,12 @@ export default class LookContainer extends Component {
 
   addNewLook(e) {
     const newLook = this.state.newLookDescription
-    const clientID = this.props.clientData._id
+    const clientID = this.state.clientData._id
     if (e.key === 'Enter') {
       this.service.addNewLook(newLook, clientID)
         .then(createdLook => {
+          console.log(createdLook)
           let looksClonedArray = [...this.state.allLooks]
-          createdLook = createdLook.data
           looksClonedArray.unshift(
             new LookElement(createdLook._id, createdLook.description, createdLook.timestamp)
           )
@@ -69,7 +69,7 @@ export default class LookContainer extends Component {
 
   render() {
     // console.log(this.props.clientData)
-      console.log(this.state.clientData)
+      // console.log(this.state.clientData)
     return (
       <section className="task-collection">
         <input type="text"

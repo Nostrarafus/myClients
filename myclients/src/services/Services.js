@@ -84,16 +84,14 @@ export default class AuthServices {
   }
 
   addNewLook = (newLook, clientID) => {
-    return this.service.post('/addLook', { newLook }, { clientID })
+    return this.service.post('/addLook', { newLook , clientID })
       .then(response => response.data)
       .catch(errHandler);
   }
 
   getLooks = (clientID) => {
-    //console.log(clientID)
     return this.service.get('/allLooks', { clientID })
       .then(response => response.data)
       .catch(errHandler);
   }
-
 }
