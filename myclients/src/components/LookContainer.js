@@ -25,14 +25,14 @@ export default class LookContainer extends Component {
     })
   }
 
-  addNewLook() {
+  addNewLook = (e) => {
+    e.preventDefault();
     const newLook = this.state.newLookDescription
     const clientID = this.state.clientID
     const lookPic = this.state.newLookFile
 
     this.service.addNewLook(newLook, clientID, lookPic)
       .then(createdLook => {
-        debugger
         console.log(createdLook)
 
         // let looksClonedArray = [...this.state.allLooks]
@@ -62,7 +62,7 @@ export default class LookContainer extends Component {
 
     return (
       <section className="task-collection">
-        <form onSubmit={() => this.addNewLook()} encType="multipart/form-data">
+        <form onSubmit={this.addNewLook} encType="multipart/form-data">
           <input type="text"
             placeholder="Add a new Look description"
             className="add-new-look"
@@ -72,7 +72,7 @@ export default class LookContainer extends Component {
 
           <input type="file" placeholder="add your look pic" onChange={(e) => this.handlePhotoChange(e)} /> <br />
 
-          <button type="submit">add your cool look</button>
+          <input type="submit" value="add your cool look" />
         </form>
 
         {(this.state.looksData) ?

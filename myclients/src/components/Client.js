@@ -7,7 +7,6 @@ export default class Client extends Component {
   constructor() {
     super()
     this.state = {
-      userData: {},
       clientData: null
     }
     this.service = new AuthServices()
@@ -35,23 +34,20 @@ export default class Client extends Component {
       })
   }
 
-  componentWillMount() {
-    this.getSingleClient()
-    this.service.getUserData()
-      .then(userData => {
-        this.setState({
-          ...this.state,
-          userData: userData
-        })
-      })
-  }
-
 
   render() {
     console.log(this.state.clientData)
     return (
       <div>
-          <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
+         {
+          (this.state.clientData)
+            ?
+            <React.Fragment>
+              <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
+            </React.Fragment>
+            : null
+        }
+          
         <div className="looksInClient">
         {
           (this.state.clientData)

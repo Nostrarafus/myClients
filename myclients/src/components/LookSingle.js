@@ -5,22 +5,25 @@ import moment from "moment";
 export default class LookSingle extends Component {
   constructor() {
     super()
-    this.timeStamp = null
-    
+    this.state={
+      timeStamp: null
+    }
   }
 
   componentDidMount() {
-    this.timeStamp = moment(this.props.created_at).format("DD/MM/Y HH:mm")
+    this.setState({
+      ...this.state,
+      timeStamp: moment(this.props.created_at).format("dddd, MMMM Do YYYY, H:mm ")
+    })
   }
 
   render() {
-console.log(this.timeStamp)
     return (
       <li className="singleLook">
         <div className="img-description-time-wrapper">
           <ZoomImg src={this.props.picture} />
           <p>Description: {this.props.lookDescription}</p>
-          <span className="timestamp">{this.timeStamp}</span>
+          <span className="timestamp">{this.state.timeStamp}</span>
         </div>
       </li>
     )

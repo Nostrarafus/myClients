@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const errHandler = err => {
-   console.error(err);
+  console.error(err);
   if (err.response && err.response.data) {
-     console.error("API response", err.response.data);
+    console.error("API response", err.response.data);
     throw err.response.data.message
   }
   throw err;
@@ -88,8 +88,8 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-  addNewInfo = (newInfo, clientID) => {
-    return this.service.post(`/client/${clientID}/addNewInfo`, newInfo)
+  addNewInfo = (newInfo, clientID, hobbies) => {
+    return this.service.post(`/client/${clientID}/addNewInfo`, { newInfo, hobbies })
       .then(response => response.data)
       .catch(errHandler);
   }

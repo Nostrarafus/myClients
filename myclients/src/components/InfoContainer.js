@@ -12,6 +12,7 @@ export default class InfoContainer extends Component {
       clientID: this.props.clientID,
     }
     this.service = new AuthServices();
+    this.hobbies = "hobbies"
     console.log(this.state.infoData)
   }
 
@@ -28,11 +29,12 @@ export default class InfoContainer extends Component {
   //       })
   // }
 
-  addNewInfo() {
+  addNewInfo(e) {
     const newInfo = this.state.newInfoDescription
     const clientID = this.state.clientID
-    //if (e.key === 'Enter') {
-    this.service.addNewInfo(newInfo, clientID)
+    const hobbies = this.hobbies
+    if (e.key === 'Enter') {
+    this.service.addNewInfo(newInfo, clientID, hobbies)
       .then(createdInfo => {
         debugger
         console.log(createdInfo)
@@ -45,10 +47,10 @@ export default class InfoContainer extends Component {
         // })
       })
   }
-  //}
+  }
 
 
-  updateNewLookDescription(e) {
+  updateNewInfoDescription(e) {
     this.setState({
       ...this.state,
       newInfoDescription: e.target.value
@@ -59,8 +61,8 @@ export default class InfoContainer extends Component {
   render() {
     return (
       <section className="info-collection">
-        <h1>{this.state.info}</h1>
         <form onSubmit={() => this.addNewInfo()}>
+        <h1>Esta caja info se llama {this.hobbies}</h1>
           <input type="text"
             placeholder="Add a new Info description"
             className="add-new-info"

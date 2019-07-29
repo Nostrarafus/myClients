@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import './sass/main.scss';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
@@ -44,12 +44,15 @@ class App extends Component {
     this.service.logout()
       .then(() => {
         this.setState({ loggedInUser: null });
+        this.props.history.push('/')
       })
   }
 
+  componentDidMount() {
+    this.fetchUser()
+  }
 
   render() {
-    this.fetchUser()
     if (this.state.loggedInUser) {
       return (
         <React.Fragment>
@@ -68,7 +71,7 @@ class App extends Component {
             <Route exact path='/' render={() => <Home />} />
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser} />} />
-            <Route render={() => { return <Redirect to="/login" /> }} />
+            {/* <Route render={() => { return <Redirect to="/login" /> }} /> */}
           </Switch>
 
         </React.Fragment>
@@ -77,4 +80,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

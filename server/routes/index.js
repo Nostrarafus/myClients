@@ -68,7 +68,7 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
     .then((look) => {
       let sentLook = look
       Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
-        .then((clientLooks) => { res.json(sentLook) })
+        .then(() => { res.json(sentLook) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 })
@@ -82,6 +82,27 @@ router.get('/client/:id', (req, res, next) => {
     .then((allClients) => { res.json(allClients) })
     .catch(err => console.log("Hubo un error!", err))
 });
+
+
+router.post(`/client/:id/addNewInfo`, uploadCloud.single('photo'), (req, res, next) => {
+  const info = req.body.newInfo
+  const client = req.params.id
+  const hobbies = req.body.hobbies
+  console.log(info)
+  ClientInfo.create({
+    client: client,
+    info: {
+      infoClass: hobbies,
+      infoData: info,
+    }
+  })
+    .then((info) => {
+      let sentinfo = info
+      Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
+        .then((clientLooks) => { res.json(sentinfo) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+})
 
 
 
