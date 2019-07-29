@@ -29,22 +29,21 @@ export default class InfoContainer extends Component {
   //       })
   // }
 
-  addNewInfo(e)  {
+  addNewInfo(e) {
     const newInfo = this.state.newInfoDescription
     const clientID = this.state.clientID
     const hobbies = this.hobbies
     if (e.key === 'Enter'){
     this.service.addNewInfo(newInfo, clientID, hobbies)
       .then(createdInfo => {
-        
-        console.log(createdInfo)
-        // let infosClonedArray = [...this.state.infoData]
-        // infosClonedArray.unshift(createdInfo)
-        // this.setState({
-        //   ...this.state,
-        //   looks: infosClonedArray,
-        //   newInfoDescription: ""
-        // })
+       // console.log(createdInfo)
+         let infosClonedArray = [...this.state.infoData]
+         infosClonedArray.unshift(createdInfo)
+        this.setState({
+          ...this.state,
+          looks: infosClonedArray,
+          newInfoDescription: ""
+        })
       })
   }}
 
@@ -62,7 +61,7 @@ export default class InfoContainer extends Component {
     return (
       <section className="info-collection">
        
-          <h1>Esta caja info se llama {this.hobbies}</h1>
+          <h1>Esta caja info se llama {this.props.infoClass}</h1>
           <input type="text"
             placeholder="Add a new Info description"
             className="add-new-info"
@@ -70,8 +69,6 @@ export default class InfoContainer extends Component {
             onChange={(e) => this.updateNewInfoDescription(e)}
             onKeyDown={(e) => this.addNewInfo(e)}
           />
-
-    
 
         {(this.state.infoData) ?
           <InfoList infos={this.state.infoData} />

@@ -4,7 +4,7 @@ import InfoSingle from './InfoSingle';
 export default class InfoList extends Component {
   render() {
     return (
-      <ol className="Look-list">
+      <ol className="infos-list">
         {
           this.props.infos.map(info =>
             <InfoSingle
