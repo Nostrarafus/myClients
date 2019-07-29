@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import AuthServices from '../services/Services'
 import LookContainer from './LookContainer';
 import InfoContainer from './InfoContainer';
@@ -39,6 +40,7 @@ export default class Client extends Component {
     console.log(this.state.clientData)
     return (
       <div>
+        <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
          {
           (this.state.clientData)
             ?

@@ -84,7 +84,7 @@ router.get('/client/:id', (req, res, next) => {
 });
 
 
-router.post(`/client/:id/addNewInfo`, uploadCloud.single('photo'), (req, res, next) => {
+router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   const info = req.body.newInfo
   const client = req.params.id
   const hobbies = req.body.hobbies
@@ -98,8 +98,9 @@ router.post(`/client/:id/addNewInfo`, uploadCloud.single('photo'), (req, res, ne
   })
     .then((info) => {
       let sentinfo = info
+      console.log(sentinfo)
       Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
-        .then((clientLooks) => { res.json(sentinfo) })
+        .then(() => { res.json(sentinfo) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 })

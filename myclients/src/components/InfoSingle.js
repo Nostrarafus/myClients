@@ -4,20 +4,25 @@ import moment from "moment";
 export default class LookSingle extends Component {
   constructor() {
     super()
-    this.timeStamp = null
-
+    this.state={
+      timeStamp: null
+    }
   }
 
   componentDidMount() {
-    this.timeStamp = moment(this.props.created_at).format("DD/MM/Y HH:mm")
+    this.setState({
+      ...this.state,
+      timeStamp: moment(this.props.created_at).format("dddd, MMMM Do YYYY, H:mm ")
+    })
   }
 
   render() {
+   // console.log(this.props)
     return (
       <li className="singleInfo">
         <div className="description-time-wrapper">
-          <p>Description: {this.props.infoDescription}</p>
-          <span className="timestamp">{this.timeStamp}</span>
+          <p>Description: {this.props.info.infoData}</p>
+          {/* <span className="timestamp">{this.state.timeStamp}</span> */}
         </div>
       </li>
     )

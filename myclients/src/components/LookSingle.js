@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ZoomImg from './ZoomImg';
 import moment from "moment";
 
+
+
 export default class LookSingle extends Component {
   constructor() {
     super()
