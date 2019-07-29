@@ -23,7 +23,7 @@ export default class Client extends Component {
     const clientID = params.id
     this.service.getSingleClient(clientID)
       .then(response => {
-       // console.log(response)
+        console.log(response)
         const theclient = response[0];
         this.setState({
           ...this.state,
@@ -51,16 +51,27 @@ export default class Client extends Component {
     console.log(this.state.clientData)
     return (
       <div>
+          <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
+        <div className="looksInClient">
         {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
               <LookContainer clientID={this.state.clientData._id} looksData={this.state.clientData.looks}></LookContainer>
-
             </React.Fragment>
             : null
         }
+        </div>
+        <div className="infosInClient">
+        {
+          (this.state.clientData)
+            ?
+            <React.Fragment>
+              <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos}></InfoContainer>
+            </React.Fragment>
+            : null
+        }
+        </div>
       </div>
     )
   }

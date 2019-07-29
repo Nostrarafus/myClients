@@ -1,6 +1,5 @@
 import moment from "moment";
 
-
 export default class InfoElement {
   constructor(_id, description, timestamp) {
     this._id = _id

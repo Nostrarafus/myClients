@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
+import moment from "moment";
 
-export default class InfoSingle extends Component {
+export default class LookSingle extends Component {
+  constructor() {
+    super()
+    this.timeStamp = null
+
+  }
+
+  componentDidMount() {
+    this.timeStamp = moment(this.props.created_at).format("DD/MM/Y HH:mm")
+  }
+
   render() {
     return (
       <li className="singleInfo">
-        <div className="info-description-time-wrapper">
-          <h1>Title:{this.props.title}</h1>
-          <p>Description: {this.props.description}</p>
-          <span className="timestamp">{this.props.timestamp}</span>
+        <div className="description-time-wrapper">
+          <p>Description: {this.props.infoDescription}</p>
+          <span className="timestamp">{this.timeStamp}</span>
         </div>
       </li>
     )

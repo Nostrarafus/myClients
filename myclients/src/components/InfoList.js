@@ -6,7 +6,7 @@ export default class InfoList extends Component {
     return (
       <ol className="Look-list">
       {
-        this.props.Infos.map(info =>
+        this.props.infos.map(info =>
           <InfoSingle
             key={info._id}
             {...info}

@@ -30,7 +30,6 @@ export default class LookContainer extends Component {
     const clientID = this.state.clientID
     const lookPic = this.state.newLookFile
 
-    //if (e.key === 'Enter') {
     this.service.addNewLook(newLook, clientID, lookPic)
       .then(createdLook => {
         debugger
@@ -38,7 +37,7 @@ export default class LookContainer extends Component {
 
         // let looksClonedArray = [...this.state.allLooks]
         // looksClonedArray.unshift(
-        //   new LookElement(createdLook._id, createdLook.description, createdLook.timestamp)
+        //   createdLook
         // )
 
         // this.setState({
@@ -48,12 +47,11 @@ export default class LookContainer extends Component {
         // })
       })
   }
-  //}
+
 
 
 
   handlePhotoChange(e) {
-
     this.setState({
       ...this.state,
       newLookFile: e.target.files[0]

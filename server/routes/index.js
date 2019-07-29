@@ -58,7 +58,7 @@ router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
 router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, next) => {
   const imgPath = req.file.url
   const look = req.body.newLook
-  const client = req.body.clientID
+  const client = req.params.id
   console.log(look, client)
   Looks.create({
     client: client,
@@ -82,6 +82,8 @@ router.get('/client/:id', (req, res, next) => {
     .then((allClients) => { res.json(allClients) })
     .catch(err => console.log("Hubo un error!", err))
 });
+
+
 
 // router.get(`/client/:id/allLooks`, (req, res, next) => {
 //   const client = req.params.id

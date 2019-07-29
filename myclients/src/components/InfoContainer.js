@@ -1,59 +1,58 @@
 import React, { Component } from 'react'
 import InfoList from './InfoList';
 import AuthServices from '../services/Services';
-import LookElement from './LookElement';
+
 
 export default class InfoContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       newInfoDescription: "",
-      allInfo: [],
-      clientData: this.props.clientData,
+      infoData: this.props.infoData,
+      clientID: this.props.clientID,
     }
     this.service = new AuthServices();
+    console.log(this.state.infoData)
   }
 
 
-  getInfos() {
-    const clientID = this.state.clientData._id
-    this.service.getLooks(clientID)
-      .then(allLooks => {
-        console.log(allLooks.looks)
-        if (allLooks !== null) {
-          allLooks = allLooks.looks.map(look => {
-            return new LookElement(
-              look._id, look.lookDescription, look.timestamp,
-            )
-          })
-          this.setState({
-            ...this.state,
-            allLooks: allLooks
-          })
-        }
+  // getInfos() {
+  //   const clientID = this.state.clientID
+  //   this.service.getLooks(clientID)
+  //     .then(allInfo => {
+  //       console.log(allInfo)
+  //         this.setState({
+  //           ...this.state,
+  //           infoData: allInfo
+  //         })
+  //       })
+  // }
+
+  addNewInfo() {
+    const newInfo = this.state.newInfoDescription
+    const clientID = this.state.clientID
+    //if (e.key === 'Enter') {
+    this.service.addNewInfo(newInfo, clientID)
+      .then(createdInfo => {
+        debugger
+        console.log(createdInfo)
+        // let infosClonedArray = [...this.state.infoData]
+        // infosClonedArray.unshift(createdInfo)
+        // this.setState({
+        //   ...this.state,
+        //   looks: infosClonedArray,
+        //   newInfoDescription: ""
+        // })
       })
   }
+  //}
 
-  addNewInfo(e) {
-    if (e.key === 'Enter') {
-      //  this.service.addInfo()
-      //     .then(createdInfo=> {
-      //       let infoClonedArray = [...this.state.tasks]
 
-      //       createdInfo = createdTask.data
-
-      //       infoClonedArray.unshift(
-      //         new TaskElement(createdTask._id, createdTask.description, createdTask.timestamp, createdTask.favourited, createdTask.done)
-      //       )
-
-      //       this.setState({
-      //         ...this.state,
-      //         allInfo: infoClonedArray,
-      //         newInfoDescription: ""
-      //       })
-      //     })
-
-    }
+  updateNewLookDescription(e) {
+    this.setState({
+      ...this.state,
+      newInfoDescription: e.target.value
+    })
   }
 
 
@@ -72,7 +71,10 @@ export default class InfoContainer extends Component {
 
         </form>
 
-        <InfoList infos={this.state.allInfos} />
+        {(this.state.infoData) ?
+          <InfoList infos={this.state.infoData} />
+          : null
+        }
 
 
       </section>

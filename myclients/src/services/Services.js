@@ -1,14 +1,13 @@
 import axios from 'axios'
 
 const errHandler = err => {
-  // console.error(err);
+   console.error(err);
   if (err.response && err.response.data) {
-    // console.error("API response", err.response.data);
+     console.error("API response", err.response.data);
     throw err.response.data.message
   }
   throw err;
 }
-
 
 
 export default class AuthServices {
@@ -17,9 +16,7 @@ export default class AuthServices {
       baseURL: 'http://localhost:5000',
       withCredentials: true
     })
-
   }
-
 
   signup = (username, password) => {
     return this.service.post('/auth/signup', { username, password })
@@ -81,28 +78,28 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-
   addNewLook = (newLook, clientID, file) => {
-    console.log(newLook,clientID)
+    console.log(newLook, clientID)
     const formData = new FormData();
     formData.append("photo", file)
     formData.append("newLook", newLook)
-    formData.append("clientID", clientID)
     return this.service.post(`/client/${clientID}/addNewLook`, formData)
       .then(response => response.data)
       .catch(errHandler);
   }
+
+  addNewInfo = (newInfo, clientID) => {
+    return this.service.post(`/client/${clientID}/addNewInfo`, newInfo)
+      .then(response => response.data)
+      .catch(errHandler);
+  }
+
+
+}
+
 
   // getLooks = (clientID) => {
   //   return this.service.get(`/client/${clientID}/allLooks`)
   //     .then(response => response.data)
   //     .catch(errHandler);
   // }
-
-
-
-
-}
-
-
-//  newLook, clientID
