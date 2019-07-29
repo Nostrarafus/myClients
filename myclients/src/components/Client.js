@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import AuthServices from '../services/Services'
 import LookContainer from './LookContainer';
+import InfoContainer from './InfoContainer';
 
 export default class Client extends Component {
   constructor() {
     super()
     this.state = {
-      userData:{},
+      userData: {},
       clientData: null
     }
     this.service = new AuthServices()
@@ -22,6 +23,7 @@ export default class Client extends Component {
     const clientID = params.id
     this.service.getSingleClient(clientID)
       .then(response => {
+       // console.log(response)
         const theclient = response[0];
         this.setState({
           ...this.state,
@@ -34,6 +36,7 @@ export default class Client extends Component {
   }
 
   componentWillMount() {
+    this.getSingleClient()
     this.service.getUserData()
       .then(userData => {
         this.setState({
@@ -45,17 +48,19 @@ export default class Client extends Component {
 
 
   render() {
+    console.log(this.state.clientData)
     return (
       <div>
         {
           (this.state.clientData)
-          ?
-          <React.Fragment>
-        <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
-        <LookContainer clientData={this.state.clientData}></LookContainer>
-        </React.Fragment>
-          :null
-          }
+            ?
+            <React.Fragment>
+              <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
+              <LookContainer clientID={this.state.clientData._id} looksData={this.state.clientData.looks}></LookContainer>
+
+            </React.Fragment>
+            : null
+        }
       </div>
     )
   }

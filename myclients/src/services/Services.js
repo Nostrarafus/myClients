@@ -57,14 +57,6 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-
-  getSingleClient = (clientID) => {
-    return this.service.get(`/client/${clientID}`)
-      .then(response => response.data)
-      .catch(errHandler);
-  }
-
-
   addUserPicture = (file) => {
     const formData = new FormData();
     formData.append("photo", file)
@@ -83,15 +75,34 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-  addNewLook = (newLook, clientID) => {
-    return this.service.post('/addLook', { newLook , clientID })
+  getSingleClient = (clientID) => {
+    return this.service.get(`/client/${clientID}`)
       .then(response => response.data)
       .catch(errHandler);
   }
 
-  getLooks = (clientID) => {
-    return this.service.get('/allLooks', { clientID })
+
+  addNewLook = (newLook, clientID, file) => {
+    console.log(newLook,clientID)
+    const formData = new FormData();
+    formData.append("photo", file)
+    formData.append("newLook", newLook)
+    formData.append("clientID", clientID)
+    return this.service.post(`/client/${clientID}/addNewLook`, formData)
       .then(response => response.data)
       .catch(errHandler);
   }
+
+  // getLooks = (clientID) => {
+  //   return this.service.get(`/client/${clientID}/allLooks`)
+  //     .then(response => response.data)
+  //     .catch(errHandler);
+  // }
+
+
+
+
 }
+
+
+//  newLook, clientID

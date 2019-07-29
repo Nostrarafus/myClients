@@ -30,15 +30,18 @@ export default class Profile extends Component {
   }
 
   componentWillMount() {
-    this.service.getUserData()
-      .then(userData => {
-        this.setState({
-          ...this.state,
-          userData: userData
-        })
-      })
+  this.getUserData()
   }
 
+  getUserData = () =>{
+    this.service.getUserData()
+    .then(userData => {
+      this.setState({
+        ...this.state,
+        userData: userData
+      })
+    })
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -68,9 +71,8 @@ export default class Profile extends Component {
   handlePhotoSubmit(e) {
     e.preventDefault()
     this.service.addUserPicture(this.state.file)
+    this.getUserData()
   }
-
-
 
 
   handlePhotoChange(e) {
