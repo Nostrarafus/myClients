@@ -13,7 +13,7 @@ const errHandler = err => {
 export default class AuthServices {
   constructor() {
     this.service = axios.create({
-      baseURL: 'http://localhost:5000',
+      baseURL: process.env.REACT_APP_URL,
       withCredentials: true
     })
   }
