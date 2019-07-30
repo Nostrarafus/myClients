@@ -43,6 +43,7 @@ export default class Client extends Component {
   }
 
   render() {
+    console.log(this.state.clientData)
     return (
       <div>
         <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
@@ -60,7 +61,10 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-                <LookContainer clientID={this.state.clientData._id} looksData={this.state.clientData.looks}></LookContainer>
+                <LookContainer
+                  clientID={this.state.clientData._id}
+                  looksData={this.state.clientData.looks}>
+                </LookContainer>
               </React.Fragment>
               : null
           }
@@ -70,9 +74,19 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-                <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos[1].infoData} infoTitle={this.state.clientData.infos[1].infoTitle} infoID={this.state.clientData.infos[0]._id} ></InfoContainer>
-                <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos[0].infoData} infoTitle={this.state.clientData.infos[0].infoTitle} infoID={this.state.clientData.infos[1]._id} ></InfoContainer>
-                <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos[2].infoData} infoTitle={this.state.clientData.infos[2].infoTitle} infoID={this.state.clientData.infos[2]._id} ></InfoContainer>
+                {
+                  this.state.clientData.infos.map(info => {
+                    return (
+                      <InfoContainer
+                        key={info._id}
+                        clientID={this.state.clientData._id}
+                        infoData={info.infoData}
+                        infoTitle={info.infoTitle}
+                        infoID={info._id} />
+                    )
+                  })
+                }
+            
               </React.Fragment>
 
               : null

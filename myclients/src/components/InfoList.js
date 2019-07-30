@@ -3,7 +3,7 @@ import InfoSingle from './InfoSingle';
 
 export default class InfoList extends Component {
   render() {
-    console.log(this.props.infoID)
+   // console.log(this.props.infoID)
     return (
       <ol className="infos-list">
         {

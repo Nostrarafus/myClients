@@ -18,7 +18,7 @@ export default class LookSingle extends Component {
   }
 
   render() {
-     console.log(this.props)
+     //console.log(this.props)
     return (
       <li className="singleInfo">
         <div className="description-time-wrapper">
