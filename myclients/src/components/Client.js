@@ -86,7 +86,6 @@ export default class Client extends Component {
                     )
                   })
                 }
-            
               </React.Fragment>
 
               : null
