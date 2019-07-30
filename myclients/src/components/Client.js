@@ -38,7 +38,7 @@ export default class Client extends Component {
   }
 
   sendCorrectInfo = () => {
-    console.log(this.state.clientData)
+    //console.log(this.state.clientData)
 
   }
 

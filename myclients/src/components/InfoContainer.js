@@ -15,7 +15,7 @@ export default class InfoContainer extends Component {
     }
     this.service = new AuthServices();
 
-      console.log(this.state)
+    console.log(this.state)
   }
 
 
@@ -38,12 +38,12 @@ export default class InfoContainer extends Component {
     if (e.key === 'Enter') {
       this.service.addNewInfo(newInfo, clientID, infoTitle)
         .then(response => {
-          console.log(response)
-          // this.setState({
-          //   ...this.state,
-          //   newInfoDescription: "",
-          //   infoData: response.infos.map(info=> info.infoData),
-          // });
+          console.log(response.infoData)
+          this.setState({
+            ...this.state,
+            newInfoDescription: "",
+            infoData: response.infoData,
+          });
         })
         .catch(error => {
           this.setState({

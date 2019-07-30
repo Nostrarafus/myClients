@@ -72,7 +72,20 @@ export default class Profile extends Component {
   handlePhotoSubmit(e) {
     e.preventDefault()
     this.service.addUserPicture(this.state.file)
-    this.getUserData()
+      .then(response => {
+         console.log(response)
+      //   this.setState({
+      //     ...this.state,
+      //     addClient: "",
+      //     allClients: response.clients,
+      //   });
+      // })
+      // .catch(error => {
+      //   this.setState({
+      //     addClient: clientName,
+      //     error: true
+      //   });
+      })
   }
 
 

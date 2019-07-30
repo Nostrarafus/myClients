@@ -64,7 +64,7 @@ router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
   const imgPath = req.file.url
   User.findOneAndUpdate({ _id: req.user._id }, { $push: { picture: { imgName: imgName, imgPath: imgPath } } }, { new: true })
     .then(photo => {
-      res.json({ url: req.file.url });
+      res.json(photo);
     })
     .catch(error => {
       console.log(error);
@@ -110,7 +110,7 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
     .then((info) => {
       console.log(info)
-      const newInfo = info
+      const newInfo = info  
       Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
         .then(() => { res.json(newInfo) })
         .catch(err => console.log("Hubo un error!", err))

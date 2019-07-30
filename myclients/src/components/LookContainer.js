@@ -32,20 +32,20 @@ export default class LookContainer extends Component {
     const lookPic = this.state.newLookFile
 
     this.service.addNewLook(newLook, clientID, lookPic)
-      .then(createdLook => {
-        console.log(createdLook)
-        let looksClonedArray = [...this.state.looksData]
-        looksClonedArray.unshift(
-          createdLook
-        )
-
-        this.setState({
-          ...this.state,
-          looksData: looksClonedArray,
-          newLookDescription: "",
-          newLookFile: null
-        })
-      })
+    .then(response => {
+      console.log(response)
+      // this.setState({
+      //   ...this.state,
+      //   newLookDescription: "",
+      //   newLookFile: null,
+      // });
+    })
+    // .catch(error => {
+    //   this.setState({
+    //     newLookDescription: "",
+    //     error: true
+    //   });
+    // })
   }
 
 
