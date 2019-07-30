@@ -30,17 +30,17 @@ export default class Profile extends Component {
   }
 
   componentWillMount() {
-  this.getUserData()
+    this.getUserData()
   }
 
-  getUserData = () =>{
+  getUserData = () => {
     this.service.getUserData()
-    .then(userData => {
-      this.setState({
-        ...this.state,
-        userData: userData
+      .then(userData => {
+        this.setState({
+          ...this.state,
+          userData: userData
+        })
       })
-    })
   }
 
   handleFormSubmit = (event) => {
@@ -49,7 +49,7 @@ export default class Profile extends Component {
 
     this.service.addClient(clientName)
       .then(response => {
-       // console.log(response)
+        // console.log(response)
         this.setState({
           ...this.state,
           addClient: "",
@@ -88,7 +88,7 @@ export default class Profile extends Component {
 
   render() {
     //console.log(this.state.userData)
-   //3 console.log(this.state.allClients)  
+    // console.log(this.state.allClients)  
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>
@@ -118,7 +118,7 @@ export default class Profile extends Component {
           {(this.state.userData.picture) ? <ZoomImg src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
         </div>
 
-        
+
       </div>
     )
   }

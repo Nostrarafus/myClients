@@ -7,8 +7,6 @@ const Looks = require('../models/Looks')
 const ClientInfo = require('../models/ClientInfo')
 
 
-
-
 router.post('/addClient', (req, res, next) => {
   const currentuser = req.user._id
   const client = req.body.clientName
@@ -111,9 +109,10 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   console.log(infoTitle)
   ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
     .then((info) => {
-      console.log(sentinfo)
+      console.log(info)
+      const newInfo = info
       Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
-        .then(() => { res.json(sentinfo) })
+        .then(() => { res.json(newInfo) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 })

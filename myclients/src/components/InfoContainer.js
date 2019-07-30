@@ -15,7 +15,7 @@ export default class InfoContainer extends Component {
     }
     this.service = new AuthServices();
 
-    //  console.log(this.state)
+      console.log(this.state)
   }
 
 
@@ -37,15 +37,19 @@ export default class InfoContainer extends Component {
     const infoTitle = this.state.infoTitle
     if (e.key === 'Enter') {
       this.service.addNewInfo(newInfo, clientID, infoTitle)
-        .then(createdInfo => {
-          // console.log(createdInfo)
-          let infosClonedArray = [...this.state.infoData]
-          infosClonedArray.unshift(createdInfo)
+        .then(response => {
+          console.log(response)
+          // this.setState({
+          //   ...this.state,
+          //   newInfoDescription: "",
+          //   infoData: response.infos.map(info=> info.infoData),
+          // });
+        })
+        .catch(error => {
           this.setState({
-            ...this.state,
-            looks: infosClonedArray,
-            newInfoDescription: ""
-          })
+            newInfoDescription: newInfo,
+            error: true
+          });
         })
     }
   }
