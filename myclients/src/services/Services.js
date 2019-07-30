@@ -73,7 +73,7 @@ export default class AuthServices {
   }
 
   getSingleClient = (clientID) => {
-    return this.service.get(`/clientData/${clientID}`)
+    return this.service.post(`/clientData`, {clientID})
       .then(response => response.data)
       .catch(errHandler);
   }

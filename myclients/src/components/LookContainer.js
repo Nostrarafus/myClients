@@ -41,7 +41,7 @@ export default class LookContainer extends Component {
 
         this.setState({
           ...this.state,
-          looks: looksClonedArray,
+          looksData: looksClonedArray,
           newLookDescription: "",
           newLookFile: null
         })
@@ -59,7 +59,7 @@ export default class LookContainer extends Component {
   }
 
   render() {
-
+    console.log(this.state.looksData)
     return (
       <section className="task-collection">
         <form onSubmit={this.addNewLook} encType="multipart/form-data">

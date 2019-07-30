@@ -49,11 +49,11 @@ export default class Profile extends Component {
 
     this.service.addClient(clientName)
       .then(response => {
-        console.log(response)
+       // console.log(response)
         this.setState({
           ...this.state,
           addClient: "",
-          allClients: response,
+          allClients: response.clients,
         });
       })
       .catch(error => {
@@ -88,6 +88,7 @@ export default class Profile extends Component {
 
   render() {
     //console.log(this.state.userData)
+   //3 console.log(this.state.allClients)  
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>

@@ -21,22 +21,28 @@ router.post('/addClient', (req, res, next) => {
       ClientInfo.create({
         client: clientID,
         infoTitle: "Hobbies",
+      }).then((info) => {
+        Client.findByIdAndUpdate(clientID, { $push: { infos: info._id } }, { new: true })
+          .then(() => res.status(200))
       })
       ClientInfo.create({
         client: clientID,
         infoTitle: "Datos personales",
+      }).then((info) => {
+        Client.findByIdAndUpdate(clientID, { $push: { infos: info._id } }, { new: true })
+          .then(() => res.status(200))
       })
       ClientInfo.create({
         client: clientID,
         infoTitle: "Restaurantes visitados",
+      }).then((info) => {
+        Client.findByIdAndUpdate(clientID, { $push: { infos: info._id } }, { new: true })
+          .then(() => res.status(200))
       })
       User.findOneAndUpdate({ _id: req.user._id }, { $push: { clients: clientID } }, { new: true })
-        .then((x) => {
-          Client.find({ owner: currentuser })
-            .populate("infos")
-            .then((allClients) => { res.json(allClients) })
-            .catch(err => console.log("Hubo un error!", err))
-        }).catch(err => console.log("Hubo un error!", err))
+        .populate("clients")
+        .then((user) => { res.json(user) })
+        .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 })
 
@@ -88,9 +94,9 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
 })
 
 
-router.get('/clientData/:id', (req, res, next) => {
+router.post('/clientData', (req, res, next) => {
   Client
-    .find({ _id: req.params.id })
+    .findById(req.body.clientID)
     .populate("looks")
     .populate("infos")
     .then((client) => { res.json(client) })
@@ -104,7 +110,7 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   const infoTitle = req.body.infoTitle
   console.log(infoTitle)
   if (infoTitle == "Hobbies" || infoTitle == "Datos personales" || infoTitle == "Restaurantes visitados") {
-    ClientInfo.findOneAndUpdate({ infoTitle: infoTitle }, { $push: { infoData: info } }, { new: true })
+    ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
       .then((info) => {
         let sentinfo = info
         console.log(sentinfo)

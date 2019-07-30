@@ -32,10 +32,10 @@ export default class Client extends Component {
     this.service.getSingleClient(clientID)
       .then(response => {
         console.log(response)
-        const theclient = response[0];
+        // const theclient = response[0];
         this.setState({
           ...this.state,
-          clientData: theclient
+          clientData: response
         });
       })
       .catch((err) => {
