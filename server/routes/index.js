@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Client = require('../models/Client');
-const uploadCloud = require('../config/cloudinary.js');
+const uploadCloud = require('../config/Cloudinary.js');
 const Looks = require('../models/Looks')
 const ClientInfo = require('../models/ClientInfo')
 
