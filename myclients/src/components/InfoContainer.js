@@ -10,6 +10,7 @@ export default class InfoContainer extends Component {
       newInfoDescription: "",
       infoData: this.props.infoData,
       clientID: this.props.clientID,
+      infoTitle: this.props.title
     }
     this.service = new AuthServices();
     this.hobbies = "hobbies"
@@ -32,21 +33,21 @@ export default class InfoContainer extends Component {
   addNewInfo(e) {
     const newInfo = this.state.newInfoDescription
     const clientID = this.state.clientID
-    const hobbies = this.hobbies
-    if (e.key === 'Enter'){
-    this.service.addNewInfo(newInfo, clientID, hobbies)
-      .then(createdInfo => {
-       // console.log(createdInfo)
-         let infosClonedArray = [...this.state.infoData]
-         infosClonedArray.unshift(createdInfo)
-        this.setState({
-          ...this.state,
-          looks: infosClonedArray,
-          newInfoDescription: ""
+    const infoTitle = this.state.infoTitle
+    if (e.key === 'Enter') {
+      this.service.addNewInfo(newInfo, clientID, infoTitle)
+        .then(createdInfo => {
+          // console.log(createdInfo)
+          let infosClonedArray = [...this.state.infoData]
+          infosClonedArray.unshift(createdInfo)
+          this.setState({
+            ...this.state,
+            looks: infosClonedArray,
+            newInfoDescription: ""
+          })
         })
-      })
-  }}
-
+    }
+  }
 
 
   updateNewInfoDescription(e) {
@@ -60,15 +61,15 @@ export default class InfoContainer extends Component {
   render() {
     return (
       <section className="info-collection">
-       
-          <h1>Esta caja info se llama {this.props.infoClass}</h1>
-          <input type="text"
-            placeholder="Add a new Info description"
-            className="add-new-info"
-            value={this.state.newInfoDescription}
-            onChange={(e) => this.updateNewInfoDescription(e)}
-            onKeyDown={(e) => this.addNewInfo(e)}
-          />
+
+        <h1>{this.state.infoTitle}</h1>
+        <input type="text"
+          placeholder="Add a new Info description"
+          className="add-new-info"
+          value={this.state.newInfoDescription}
+          onChange={(e) => this.updateNewInfoDescription(e)}
+          onKeyDown={(e) => this.addNewInfo(e)}
+        />
 
         {(this.state.infoData) ?
           <InfoList infos={this.state.infoData} />

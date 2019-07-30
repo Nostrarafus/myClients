@@ -3,10 +3,8 @@ const Schema = mongoose.Schema;
 
 const ClientInfoSchema = new Schema({
   client: { type: Schema.Types.ObjectId, ref: "Client" },
-  info: {
-    infoClass: String,
-    infoData: Array,
-  }
+  infoTitle: String,
+  infoData: Array,
 }, {
     timestamps: {
       createdAt: 'created_at',

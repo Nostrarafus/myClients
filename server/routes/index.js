@@ -17,9 +17,23 @@ router.post('/addClient', (req, res, next) => {
     clientName: client
   })
     .then((client) => {
-      User.findOneAndUpdate({ _id: req.user._id }, { $push: { clients: client._id } }, { new: true })
+      const clientID = client._id
+      ClientInfo.create({
+        client: clientID,
+        infoTitle: "Hobbies",
+      })
+      ClientInfo.create({
+        client: clientID,
+        infoTitle: "Datos personales",
+      })
+      ClientInfo.create({
+        client: clientID,
+        infoTitle: "Restaurantes visitados",
+      })
+      User.findOneAndUpdate({ _id: req.user._id }, { $push: { clients: clientID } }, { new: true })
         .then((x) => {
           Client.find({ owner: currentuser })
+            .populate("infos")
             .then((allClients) => { res.json(allClients) })
             .catch(err => console.log("Hubo un error!", err))
         }).catch(err => console.log("Hubo un error!", err))
@@ -74,12 +88,12 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
 })
 
 
-router.get('/client/:id', (req, res, next) => {
+router.get('/clientData/:id', (req, res, next) => {
   Client
     .find({ _id: req.params.id })
     .populate("looks")
     .populate("infos")
-    .then((allClients) => { res.json(allClients) })
+    .then((client) => { res.json(client) })
     .catch(err => console.log("Hubo un error!", err))
 });
 
@@ -87,22 +101,32 @@ router.get('/client/:id', (req, res, next) => {
 router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   const info = req.body.newInfo
   const client = req.params.id
-  const hobbies = req.body.hobbies
-  console.log(info)
-  ClientInfo.create({
-    client: client,
-    info: {
-      infoClass: hobbies,
+  const infoTitle = req.body.infoTitle
+  console.log(infoTitle)
+  if (infoTitle == "Hobbies" || infoTitle == "Datos personales" || infoTitle == "Restaurantes visitados") {
+    ClientInfo.findOneAndUpdate({ infoTitle: infoTitle }, { $push: { infoData: info } }, { new: true })
+      .then((info) => {
+        let sentinfo = info
+        console.log(sentinfo)
+        Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
+          .then(() => { res.json(sentinfo) })
+          .catch(err => console.log("Hubo un error!", err))
+      }).catch(err => console.log("Hubo un error!", err))
+  }
+  else {
+    ClientInfo.create({
+      client: client,
+      infoTitle: infoTitle,
       infoData: info,
-    }
-  })
-    .then((info) => {
+    }).then((info) => {
       let sentinfo = info
       console.log(sentinfo)
       Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
         .then(() => { res.json(sentinfo) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
+  }
+
 })
 
 

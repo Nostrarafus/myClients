@@ -15,7 +15,7 @@ export default class LookContainer extends Component {
       clientID: this.props.clientID,
     }
     this.service = new AuthServices();
-    console.log(this.state.looksData)
+   // console.log(this.state.looksData)
   }
 
   updateNewLookDescription(e) {

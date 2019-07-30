@@ -73,7 +73,7 @@ export default class AuthServices {
   }
 
   getSingleClient = (clientID) => {
-    return this.service.get(`/client/${clientID}`)
+    return this.service.get(`/clientData/${clientID}`)
       .then(response => response.data)
       .catch(errHandler);
   }
@@ -88,8 +88,8 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-  addNewInfo = (newInfo, clientID, hobbies) => {
-    return this.service.post(`/client/${clientID}/addNewInfo`, { newInfo, hobbies })
+  addNewInfo = (newInfo, clientID, infoTitle) => {
+    return this.service.post(`/client/${clientID}/addNewInfo`, { newInfo, infoTitle })
       .then(response => response.data)
       .catch(errHandler);
   }

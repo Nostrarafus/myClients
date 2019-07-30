@@ -49,6 +49,7 @@ export default class Profile extends Component {
 
     this.service.addClient(clientName)
       .then(response => {
+        console.log(response)
         this.setState({
           ...this.state,
           addClient: "",

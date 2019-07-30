@@ -6,6 +6,7 @@ export default class InfoList extends Component {
     return (
       <ol className="infos-list">
         {
+          (this.props.infos)?
           this.props.infos.map(info =>
             <InfoSingle
               key={info._id}
@@ -13,6 +14,7 @@ export default class InfoList extends Component {
             >
             </InfoSingle>
           )
+          :null
         }
       </ol>
     )

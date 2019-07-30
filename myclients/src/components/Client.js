@@ -8,7 +8,12 @@ export default class Client extends Component {
   constructor() {
     super()
     this.state = {
-      clientData: null
+      clientData: null,
+      listTitle: {
+        hobbies: "Hobbies",
+        dp: "Datos personales",
+        restaurantes: "Restaurantes visitados",
+      }
     }
     this.service = new AuthServices()
   }
@@ -16,6 +21,9 @@ export default class Client extends Component {
 
   componentDidMount() {
     this.getSingleClient();
+    // setTimeout(() => {
+    //   console.log(this.state.clientData.infos)
+    // }, 500);
   }
 
   getSingleClient = () => {
@@ -41,7 +49,7 @@ export default class Client extends Component {
     return (
       <div>
         <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
-         {
+        {
           (this.state.clientData)
             ?
             <React.Fragment>
@@ -49,26 +57,29 @@ export default class Client extends Component {
             </React.Fragment>
             : null
         }
-          
+
         <div className="looksInClient">
-        {
-          (this.state.clientData)
-            ?
-            <React.Fragment>
-              <LookContainer clientID={this.state.clientData._id} looksData={this.state.clientData.looks}></LookContainer>
-            </React.Fragment>
-            : null
-        }
+          {
+            (this.state.clientData)
+              ?
+              <React.Fragment>
+                <LookContainer clientID={this.state.clientData._id} looksData={this.state.clientData.looks}></LookContainer>
+              </React.Fragment>
+              : null
+          }
         </div>
         <div className="infosInClient">
-        {
-          (this.state.clientData)
-            ?
-            <React.Fragment>
-              <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos}></InfoContainer>
-            </React.Fragment>
-            : null
-        }
+          {
+            (this.state.clientData)
+              ?
+              <React.Fragment>
+                <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos} title={this.state.listTitle.hobbies}></InfoContainer>
+                <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos} title={this.state.listTitle.dp} ></InfoContainer>
+                <InfoContainer clientID={this.state.clientData._id} infoData={this.state.clientData.infos} title={this.state.listTitle.restaurantes}></InfoContainer>
+              </React.Fragment>
+
+              : null
+          }
         </div>
       </div>
     )
