@@ -109,30 +109,13 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   const client = req.params.id
   const infoTitle = req.body.infoTitle
   console.log(infoTitle)
-  if (infoTitle == "Hobbies" || infoTitle == "Datos personales" || infoTitle == "Restaurantes visitados") {
-    ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
-      .then((info) => {
-        let sentinfo = info
-        console.log(sentinfo)
-        Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
-          .then(() => { res.json(sentinfo) })
-          .catch(err => console.log("Hubo un error!", err))
-      }).catch(err => console.log("Hubo un error!", err))
-  }
-  else {
-    ClientInfo.create({
-      client: client,
-      infoTitle: infoTitle,
-      infoData: info,
-    }).then((info) => {
-      let sentinfo = info
+  ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
+    .then((info) => {
       console.log(sentinfo)
       Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
         .then(() => { res.json(sentinfo) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
-  }
-
 })
 
 

@@ -3,14 +3,16 @@ import InfoSingle from './InfoSingle';
 
 export default class InfoList extends Component {
   render() {
+    console.log(this.props.infoID)
     return (
       <ol className="infos-list">
         {
-          (this.props.infos)?
-          this.props.infos.map(info =>
+          (this.props)?
+          this.props.infoData.map((info, idx) =>
             <InfoSingle
-              key={info._id}
-              {...info}
+              key={idx}
+              infoData={info}
+              infoID={this.props.infoID}
             >
             </InfoSingle>
           )

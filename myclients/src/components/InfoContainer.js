@@ -10,11 +10,12 @@ export default class InfoContainer extends Component {
       newInfoDescription: "",
       infoData: this.props.infoData,
       clientID: this.props.clientID,
-      infoTitle: this.props.title
+      infoTitle: this.props.infoTitle,
+      infoID: this.props.infoID,
     }
     this.service = new AuthServices();
-    this.hobbies = "hobbies"
-    console.log(this.state.infoData)
+
+    //  console.log(this.state)
   }
 
 
@@ -72,7 +73,7 @@ export default class InfoContainer extends Component {
         />
 
         {(this.state.infoData) ?
-          <InfoList infos={this.state.infoData} />
+          <InfoList infoData={this.state.infoData} infoID={this.state.infoID} />
           : null
         }
 

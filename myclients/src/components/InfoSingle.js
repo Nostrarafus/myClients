@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import moment from "moment";
 
 export default class LookSingle extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      timeStamp: null
+      timeStamp: null,
+      infoID: this.props.infoID,
     }
   }
 
@@ -17,14 +18,13 @@ export default class LookSingle extends Component {
   }
 
   render() {
-    // console.log(this.props)
+     console.log(this.props)
     return (
       <li className="singleInfo">
         <div className="description-time-wrapper">
           {(this.props) ?
-            <p>Description: {this.props.infoData}</p>
+            <p>{this.props.infoData}</p>
             : null}
-
           {/* <span className="timestamp">{this.state.timeStamp}</span> */}
         </div>
       </li>
