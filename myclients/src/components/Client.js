@@ -26,7 +26,7 @@ export default class Client extends Component {
     const clientID = params.id
     this.service.getSingleClient(clientID)
       .then(response => {
-        console.log(response)
+       // console.log(response)
         this.setState({
           ...this.state,
           clientData: response

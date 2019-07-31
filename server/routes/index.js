@@ -62,7 +62,7 @@ router.get('/user', (req, res, next) => {
 router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
   const imgName = req.user.username
   const imgPath = req.file.url
-  User.findOneAndUpdate({ _id: req.user._id }, { $push: { picture: { imgName: imgName, imgPath: imgPath } } }, { new: true })
+  User.findOneAndUpdate({ _id: req.user._id }, { picture: { imgName: imgName, imgPath: imgPath } }, { new: true })
     .then(photo => {
       res.json(photo);
     })
@@ -86,7 +86,8 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
     .then((look) => {
       let sentLook = look
       Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
-        .then(() => { res.json(sentLook) })
+        .populate("looks")
+        .then((clientData) => { res.json(clientData) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 })
@@ -110,7 +111,7 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
     .then((info) => {
       console.log(info)
-      const newInfo = info  
+      const newInfo = info
       Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
         .then(() => { res.json(newInfo) })
         .catch(err => console.log("Hubo un error!", err))

@@ -74,17 +74,17 @@ export default class Profile extends Component {
     this.service.addUserPicture(this.state.file)
       .then(response => {
          console.log(response)
-      //   this.setState({
-      //     ...this.state,
-      //     addClient: "",
-      //     allClients: response.clients,
-      //   });
-      // })
-      // .catch(error => {
-      //   this.setState({
-      //     addClient: clientName,
-      //     error: true
-      //   });
+        this.setState({
+          ...this.state,
+          file: null,
+          userData: response,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          file: this.state.file,
+          error: true
+        });
       })
   }
 
@@ -128,7 +128,7 @@ export default class Profile extends Component {
           <button type="submit">Update your profile pic</button>
         </form>
         <div className="userPic">
-          {(this.state.userData.picture) ? <ZoomImg src={this.state.userData.picture[0].imgPath} alt={this.state.userData.picture[0].imgName} /> : ""}
+          {(this.state.userData.picture) ? <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} /> : ""}
         </div>
 
 

@@ -15,7 +15,7 @@ export default class LookContainer extends Component {
       clientID: this.props.clientID,
     }
     this.service = new AuthServices();
-   // console.log(this.state.looksData)
+    // console.log(this.state.looksData)
   }
 
   updateNewLookDescription(e) {
@@ -32,20 +32,22 @@ export default class LookContainer extends Component {
     const lookPic = this.state.newLookFile
 
     this.service.addNewLook(newLook, clientID, lookPic)
-    .then(response => {
-      console.log(response)
-      // this.setState({
-      //   ...this.state,
-      //   newLookDescription: "",
-      //   newLookFile: null,
-      // });
-    })
-    // .catch(error => {
-    //   this.setState({
-    //     newLookDescription: "",
-    //     error: true
-    //   });
-    // })
+      .then(response => {
+        console.log(response)
+        this.setState({
+          ...this.state,
+          newLookDescription: "",
+          newLookFile: null,
+          looksData: response.looks
+        });
+      })
+      .catch(error => {
+        this.setState({
+          newLookDescription: newLook,
+          newLookFile: lookPic,
+          error: true
+        });
+      })
   }
 
 
@@ -59,7 +61,7 @@ export default class LookContainer extends Component {
   }
 
   render() {
-   //console.log(this.state.looksData)
+    console.log(this.state.looksData)
     return (
       <section className="task-collection">
         <form onSubmit={this.addNewLook} encType="multipart/form-data">
