@@ -30,7 +30,7 @@ export default class TaskSingle extends Component {
           <button onClick={() => this.props.deleteTaskInfo(this.props.taskData._id)}>Delete</button>
           {/* <span className="timestamp">{this.props.timestamp}</span> */}
         </div>
-      </li>
+      </li> 
     )
   }
 }

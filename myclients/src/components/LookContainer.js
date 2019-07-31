@@ -19,9 +19,12 @@ export default class LookContainer extends Component {
   }
 
   updateNewLookDescription(e) {
+    let regexp = e.target.value
+    regexp.replace(/^ +/gm, '')
+    console.log(regexp)
     this.setState({
       ...this.state,
-      newLookDescription: e.target.value
+      newLookDescription: regexp
     })
   }
 

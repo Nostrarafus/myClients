@@ -125,6 +125,19 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
+  addClientPicture = (file, clientID, clientName) => {
+    const formData = new FormData();
+    formData.append("photo", file)
+    formData.append("clientName", clientName)
+    return this.service.post(`/client/${clientID}/addClientPic`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then(response => response.data)
+      .catch(errHandler);
+  }
+
 }
 
 

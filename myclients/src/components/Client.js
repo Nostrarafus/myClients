@@ -4,12 +4,14 @@ import AuthServices from '../services/Services'
 import LookContainer from './LookContainer';
 import InfoContainer from './InfoContainer';
 import TaskContainer from './TaskContainer';
+import ZoomImg from './ZoomImg';
 
 export default class Client extends Component {
   constructor() {
     super()
     this.state = {
       clientData: null,
+      file: null
     }
     this.service = new AuthServices()
   }
@@ -29,9 +31,6 @@ export default class Client extends Component {
           ...this.state,
           clientData: response
         });
-      })
-      .catch((err) => {
-        console.log(err)
       })
   }
 
@@ -55,21 +54,65 @@ export default class Client extends Component {
           clientData: response
         });
       })
-      .catch((err) => {
-        console.log(err)
+  }
+
+
+  handlePhotoSubmit(e) {
+    e.preventDefault()
+    const clientID = this.state.clientData._id
+    const clientName = this.state.clientData.clientName
+    this.service.addClientPicture(this.state.file, clientID, clientName)
+      .then(response => {
+        console.log(response)
+        this.setState({
+          ...this.state,
+          file: null,
+          clientData: response,
+        });
       })
   }
+
+
+  handlePhotoChange(e) {
+    // console.log("archivos seleccionado")
+    // console.log(e.target.files[0])
+    this.setState({
+      ...this.state,
+      file: e.target.files[0]
+    })
+  }
+
+
 
   render() {
     console.log(this.state.clientData)
     return (
       <div>
         <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
+
         {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <h1>Aqui esta el perfil de: {this.state.clientData.clientName}</h1>
+              <h1>Cliente {this.state.clientData.clientName}</h1>
+            </React.Fragment>
+            : null
+        }
+        {
+          (this.state.clientData)
+            ?
+            <React.Fragment>
+              <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
+                <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
+                <button type="submit">Update your {this.state.clientData.clientName} pic</button>
+              </form>
+              <div className="clientPic">
+                {(this.state.clientData.picture) ?
+                  <React.Fragment>
+                    <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
+                  </React.Fragment>
+                  : ""}
+              </div>
             </React.Fragment>
             : null
         }

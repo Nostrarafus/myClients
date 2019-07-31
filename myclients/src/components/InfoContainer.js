@@ -56,16 +56,16 @@ export default class InfoContainer extends Component {
 
 
   updateNewInfoDescription(e) {
+    let regexp = e.target.value
+    regexp.replace(/^ +/gm, '')
+    console.log(regexp)
     this.setState({
       ...this.state,
-      newInfoDescription: e.target.value
+      newInfoDescription: regexp
     })
   }
 
   deleteInfo = (info, infoID) => {
-    // console.log(info)
-    // console.log(infoID)
-    // let chosenInfo = this.state.infoData.filter(infoData => infoData !== info)
     this.service.deleteInfo(info, infoID)
       .then(response => {
         console.log(response.infoData)
@@ -80,25 +80,6 @@ export default class InfoContainer extends Component {
         });
       })
   }
-
-  // updateInfo = (info, infoID) => {
-  //   // console.log(info)
-  //   // console.log(infoID)
-  //   // let chosenInfo = this.state.infoData.filter(infoData => infoData !== info)
-  //   this.service.deleteInfo(info, infoID)
-  //     .then(response => {
-  //       console.log(response.infoData)
-  //       this.setState({
-  //         ...this.state,
-  //         infoData: response.infoData,
-  //       });
-  //     })
-  //     .catch(error => {
-  //       this.setState({
-  //         error: true
-  //       });
-  //     })
-  // }
 
 
   render() {
@@ -120,8 +101,8 @@ export default class InfoContainer extends Component {
             infoData={this.state.infoData}
             infoID={this.state.infoID}
             deleteInfo={this.deleteInfo}
-            //updateInfo={this.updateInfo}
-            />
+          //updateInfo={this.updateInfo}
+          />
           : null
         }
 

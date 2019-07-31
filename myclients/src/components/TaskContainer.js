@@ -29,9 +29,12 @@ export default class TaskContainer extends Component {
   }
 
   updateNewTaskString(e) {
+    let regexp = e.target.value
+    regexp.replace(/^ +/gm, '')
+    console.log(regexp)
     this.setState({
       ...this.state,
-      newTaskDescription: e.target.value
+      newTaskDescription: regexp
     })
   }
 
@@ -66,7 +69,7 @@ export default class TaskContainer extends Component {
           taskData: response.tasks,
         });
       })
-      
+
   }
 
   render() {

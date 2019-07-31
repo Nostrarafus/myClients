@@ -11,7 +11,7 @@ export default class Profile extends Component {
     this.state = {
       addClient: "",
       allClients: [],
-      userPhoto: {},
+    //  userPhoto: {},
       file: null,
       userData: {},
     }
@@ -66,6 +66,7 @@ export default class Profile extends Component {
 
   handleClientChange = (event) => {
     const { name, value } = event.target;
+    value.replace(/^ +/gm, '')
     this.setState({ [name]: value });
   }
 
@@ -107,7 +108,9 @@ export default class Profile extends Component {
         <h1>Bienvenido {this.state.userData.username}</h1>
         <h2>Add a new client:</h2>
         <form onSubmit={this.handleFormSubmit}>
-          <input type="text" name="addClient" value={this.state.addClient} onChange={(e) => this.handleClientChange(e)} />
+          <input type="text" name="addClient" 
+          value={this.state.addClient} 
+          onChange={(e) => this.handleClientChange(e)} />
           <input type="submit" value="Add Client" onClick={this.showAllClients} />
         </form>
         <div className="clientsList">

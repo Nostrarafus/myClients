@@ -13,7 +13,11 @@ router.post('/addClient', (req, res, next) => {
   const client = req.body.clientName
   Client.create({
     owner: currentuser,
-    clientName: client
+    clientName: client,
+    picture:{
+      imgName:"default",
+      imgPath:"https://icon-library.net/images/default-user-icon/default-user-icon-4.jpg"
+    }
   })
     .then((client) => {
       const clientID = client._id
@@ -79,6 +83,37 @@ router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
     })
 });
 
+router.post(`/client/:id/addClientPic`, uploadCloud.single('photo'), (req, res, next) => {
+  const clientID = req.params.id
+  const imgPath = req.file.url
+  const imgName = req.body.clientName
+  Client.findOneAndUpdate({ _id: clientID }, { picture: { imgName: imgName, imgPath: imgPath } }, { new: true })
+    .then(photo => {
+      res.json(photo);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+});
+
+router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, next) => {
+  const imgPath = req.file.url
+  const look = req.body.newLook
+  const client = req.params.id
+  console.log(look, client)
+  Looks.create({
+    client: client,
+    lookDescription: look,
+    picture: imgPath,
+  })
+    .then((look) => {
+      Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
+        .populate("looks")
+        .then((clientData) => { res.json(clientData) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+})
+
 router.post('/deleteInfo', (req, res, next) => {
   const info = req.body.info
   const infoID = req.body.infoID
@@ -103,23 +138,7 @@ router.post('/deleteTaskInfo', (req, res, next) => {
 
 
 
-router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, next) => {
-  const imgPath = req.file.url
-  const look = req.body.newLook
-  const client = req.params.id
-  console.log(look, client)
-  Looks.create({
-    client: client,
-    lookDescription: look,
-    picture: imgPath,
-  })
-    .then((look) => {
-      Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
-        .populate("looks")
-        .then((clientData) => { res.json(clientData) })
-        .catch(err => console.log("Hubo un error!", err))
-    }).catch(err => console.log("Hubo un error!", err))
-})
+
 
 router.post(`/addTask`, (req, res, next) => {
   const task = req.body.newTask
