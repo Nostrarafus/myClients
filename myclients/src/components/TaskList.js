@@ -11,7 +11,8 @@ export default class TaskList extends Component {
                             toggleDone={this.props.toggleDone}
                             toggleFavourite={this.props.toggleFavourite}
                             key={task._id}
-                            {...task}
+                            taskData={task}
+                            deleteTaskInfo={this.props.deleteTaskInfo}
                         >
 
                         </TaskSingle>

@@ -33,7 +33,6 @@ export default class LookContainer extends Component {
 
     this.service.addNewLook(newLook, clientID, lookPic)
       .then(response => {
-        console.log(response)
         this.setState({
           ...this.state,
           newLookDescription: "",

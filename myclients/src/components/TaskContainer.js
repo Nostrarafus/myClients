@@ -14,40 +14,18 @@ export default class TaskContainer extends Component {
     this.service = new AuthServices();
   }
 
-  componentDidMount() {
-    // axios
-    //     .get("http://localhost:7000/tasks")
-    //     .then(taskData => {
-    //         taskData = taskData.data.map(task => {
-    //             return new TaskElement(
-    //                 task._id, task.description, task.timestamp, task.favourited, task.done
-    //             )
-    //         })
-
-    //         this.setState({
-    //             ...this.state,
-    //             tasks: taskData
-    //         })
-    //     })
-  }
-
   toggle(taskID, property) {
-    let chosenTask = this.state.tasks.filter(task => task._id === taskID)[0]
+    const clientID = this.state.clientID
+    let chosenTask = this.state.taskData.filter(task => task._id === taskID)[0]
     chosenTask[property] = !chosenTask[property]
-    console.log(chosenTask)
-    // this.service.toggle()
-    // axios
-    //   .put(`http://localhost:7000/task/${taskID}`, {
-    //     done: chosenTask.done,
-    //     favourited: chosenTask.favourited
-    //   })
-    //   .then(updatedTaskInfo => {
-    //     console.log(updatedTaskInfo);
-
-    //     this.setState({
-    //       ...this.state
-    //     })
-    //   })
+    this.service.toggleTask(taskID, clientID, chosenTask.done, chosenTask.favourited)
+      .then(response => {
+        //console.log(response)
+        this.setState({
+          ...this.state,
+          taskData: response.tasks,
+        });
+      })
   }
 
   updateNewTaskString(e) {
@@ -60,16 +38,14 @@ export default class TaskContainer extends Component {
   addNewTask(e) {
     const newTask = this.state.newTaskDescription
     const clientID = this.state.clientID
-    // const infoTitle = this.state.infoTitle
     if (e.key === 'Enter') {
       this.service.addNewTask(newTask, clientID)
         .then(response => {
-          console.log(response.infoData)
-          // this.setState({
-          //   ...this.state,
-          //   newTaskDescription: "",
-          //   taskData: response,
-          // });
+          this.setState({
+            ...this.state,
+            newTaskDescription: "",
+            taskData: response.tasks,
+          });
         })
         .catch(error => {
           this.setState({
@@ -80,7 +56,21 @@ export default class TaskContainer extends Component {
     }
   }
 
+  deleteTaskInfo = (taskID) => {
+    const clientID = this.state.clientID
+    this.service.deleteTaskInfo(taskID, clientID)
+      .then(response => {
+        this.setState({
+          ...this.state,
+          newTaskDescription: "",
+          taskData: response.tasks,
+        });
+      })
+      
+  }
+
   render() {
+    console.log(this.state.taskData)
     return (
       <section className="task-collection">
         <input type="text"
@@ -90,13 +80,12 @@ export default class TaskContainer extends Component {
           onChange={(e) => this.updateNewTaskString(e)}
           onKeyDown={(e) => this.addNewTask(e)} />
 
-
-
-
         {(this.state.taskData) ?
-          <TaskList taskData={this.state.taskData}
+          <TaskList
+            taskData={this.state.taskData}
             toggleDone={(task) => this.toggle(task, "done")}
             toggleFavourite={(task) => this.toggle(task, "favourited")}
+            deleteTaskInfo={this.deleteTaskInfo}
           >
           </TaskList>
           : null

@@ -88,6 +88,21 @@ router.post('/deleteInfo', (req, res, next) => {
     .catch(err => console.log("Hubo un error!", err))
 });
 
+router.post('/deleteTaskInfo', (req, res, next) => {
+  const taskID = req.body.taskID
+  const clientID = req.body.clientID
+  console.log(taskID)
+  Task.deleteOne({ _id: taskID })
+    .then(() => {
+      Client.findById(clientID)
+        .populate("tasks")
+        .then((task) => { res.json(task) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+});
+
+
+
 router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, next) => {
   const imgPath = req.file.url
   const look = req.body.newLook
@@ -114,13 +129,12 @@ router.post(`/addTask`, (req, res, next) => {
     description: task,
   })
     .then((task) => {
-      Client.findOneAndUpdate({ _id: client }, { $push: { tasks: task._id } }, { new: true })
+      Client.findOneAndUpdate({ _id: clientID }, { $push: { tasks: task._id } }, { new: true })
         .populate("tasks")
         .then((clientData) => { res.json(clientData) })
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 })
-
 
 
 router.post('/clientData', (req, res, next) => {
@@ -165,13 +179,20 @@ router.post(`/addNewInfoBox`, (req, res, next) => {
   }).catch(err => console.log("Hubo un error!", err))
 })
 
-// router.get(`/client/:id/allLooks`, (req, res, next) => {
-//   const client = req.params.id
-//   Client.findById(client)
-//     .populate("looks")
-//     .then((allLooks) => { res.json(allLooks) })
-//     .catch(err => console.log("Hubo un error!", err))
-// })
+
+router.post(`/toggle`, (req, res, next) => {
+  const clientID = req.body.clientID
+  const done = req.body.done
+  const fav = req.body.fav
+  const taskID = req.body.taskID
+  Task.findByIdAndUpdate(taskID, { favourited: fav, done: done }, { new: true })
+    .then(() => {
+      Client.findById(clientID)
+        .populate("tasks")
+        .then((client) => res.json(client))
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+})
 
 
 module.exports = router;

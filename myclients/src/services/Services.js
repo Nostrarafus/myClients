@@ -107,14 +107,22 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
-  addTask = (newTask, clientID) => {
-    return this.service.post(`/addTask`, { newTask, clientID})
+  addNewTask = (newTask, clientID) => {
+    return this.service.post(`/addTask`, { newTask, clientID })
       .then(response => response.data)
       .catch(errHandler);
   }
 
-  toggleTask = ()=>{
-    
+  deleteTaskInfo = (taskID, clientID) => {
+    return this.service.post(`/deleteTaskInfo`, { taskID, clientID })
+      .then(response => response.data)
+      .catch(errHandler);
+  }
+
+  toggleTask = (taskID, clientID, done, fav) => {
+    return this.service.post(`/toggle`, { taskID, clientID, done, fav })
+      .then(response => response.data)
+      .catch(errHandler);
   }
 
 }
