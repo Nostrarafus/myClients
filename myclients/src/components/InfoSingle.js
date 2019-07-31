@@ -25,7 +25,7 @@ export default class LookSingle extends Component {
         {(this.props) ?
           <div className="description-wrapper">
             <p>{this.props.infoData}</p>
-            <button onClick={this.props.deleteInfo}>Edit</button>
+            {/* <button onClick={() => this.props.updateInfo(this.props.infoData, this.props.infoID)}>Edit</button> */}
             <button onClick={() => this.props.deleteInfo(this.props.infoData, this.props.infoID)}>Delete</button>
           </div>
           : null

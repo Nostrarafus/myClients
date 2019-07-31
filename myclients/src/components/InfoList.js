@@ -14,6 +14,7 @@ export default class InfoList extends Component {
               infoData={info}
               infoID={this.props.infoID}
               deleteInfo={this.props.deleteInfo}
+              //updateInfo={this.props.updateInfo}
             >
             </InfoSingle>
           )

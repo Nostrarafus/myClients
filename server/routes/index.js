@@ -5,6 +5,7 @@ const Client = require('../models/Client');
 const uploadCloud = require('../config/Cloudinary.js');
 const Looks = require('../models/Looks')
 const ClientInfo = require('../models/ClientInfo')
+const Task = require('../models/Task')
 
 
 router.post('/addClient', (req, res, next) => {
@@ -16,6 +17,13 @@ router.post('/addClient', (req, res, next) => {
   })
     .then((client) => {
       const clientID = client._id
+      Task.create({
+        client: clientID,
+        description: "Ejemplo: Leer su libro para la proxima reunión",
+      }).then((task) => {
+        Client.findByIdAndUpdate(clientID, { $push: { tasks: task._id } }, { new: true })
+          .then(() => res.status(200))
+      })
       ClientInfo.create({
         client: clientID,
         infoTitle: "Hobbies",
@@ -98,12 +106,29 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
     }).catch(err => console.log("Hubo un error!", err))
 })
 
+router.post(`/addTask`, (req, res, next) => {
+  const task = req.body.newTask
+  const clientID = req.body.clientID
+  Task.create({
+    client: clientID,
+    description: task,
+  })
+    .then((task) => {
+      Client.findOneAndUpdate({ _id: client }, { $push: { tasks: task._id } }, { new: true })
+        .populate("tasks")
+        .then((clientData) => { res.json(clientData) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+})
+
+
 
 router.post('/clientData', (req, res, next) => {
   Client
     .findById(req.body.clientID)
     .populate("looks")
     .populate("infos")
+    .populate("tasks")
     .then((client) => { res.json(client) })
     .catch(err => console.log("Hubo un error!", err))
 });
@@ -120,6 +145,8 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
       res.json(info)
     }).catch(err => console.log("Hubo un error!", err))
 })
+
+
 
 router.post(`/addNewInfoBox`, (req, res, next) => {
   const infoTitle = req.body.infoTitle

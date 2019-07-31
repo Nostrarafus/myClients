@@ -107,6 +107,16 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
+  addTask = (newTask, clientID) => {
+    return this.service.post(`/addTask`, { newTask, clientID})
+      .then(response => response.data)
+      .catch(errHandler);
+  }
+
+  toggleTask = ()=>{
+    
+  }
+
 }
 
 

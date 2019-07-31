@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthServices from '../services/Services'
 import LookContainer from './LookContainer';
 import InfoContainer from './InfoContainer';
+import TaskContainer from './TaskContainer';
 
 export default class Client extends Component {
   constructor() {
@@ -60,7 +61,7 @@ export default class Client extends Component {
   }
 
   render() {
-     console.log(this.state.clientData)
+    console.log(this.state.clientData)
     return (
       <div>
         <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
@@ -107,6 +108,20 @@ export default class Client extends Component {
                 <button onClick={() => this.addNewInfoBox()}>Add a new Infobox for your client</button>
               </React.Fragment>
 
+              : null
+          }
+        </div>
+        <div className="taskContainer">
+          {
+            (this.state.clientData)
+              ?
+              <React.Fragment>
+                <TaskContainer
+                  taskData={this.state.clientData.tasks}
+                  clientID={this.state.clientData._id}
+                />
+
+              </React.Fragment>
               : null
           }
         </div>

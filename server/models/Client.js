@@ -10,6 +10,7 @@ const clientSchema = new Schema({
   },
   looks: [{ type: Schema.Types.ObjectId, ref: "Looks" }],
   infos: [{ type: Schema.Types.ObjectId, ref: "ClientInfo" }],
+  tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
 }, {
     timestamps: {
       createdAt: 'created_at',

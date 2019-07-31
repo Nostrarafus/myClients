@@ -61,7 +61,7 @@ export default class LookContainer extends Component {
   render() {
     //console.log(this.state.looksData)
     return (
-      <section className="task-collection">
+      <section className="looks-collection">
         <form onSubmit={this.addNewLook} encType="multipart/form-data">
           <input type="text"
             placeholder="Add a new Look description"

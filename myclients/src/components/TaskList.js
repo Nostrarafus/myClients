@@ -6,7 +6,7 @@ export default class TaskList extends Component {
         return (
             <ol className="task-list">
                 {
-                    this.props.tasks.map(task =>
+                    this.props.taskData.map(task =>
                         <TaskSingle
                             toggleDone={this.props.toggleDone}
                             toggleFavourite={this.props.toggleFavourite}
