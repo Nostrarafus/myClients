@@ -6,10 +6,8 @@ export default class TaskSingle extends Component {
 
 
   render() {
-    console.log(this.props)
     return (
       <li className="task">
-        {/* <input type="checkbox" className="done"></input> */}
 
         {
           this.props.taskData.done
@@ -28,12 +26,9 @@ export default class TaskSingle extends Component {
         <div className="name-timestamp-wrapper">
           <h3 className="name" title={this.props.taskData.description}>{this.props.taskData.description}</h3>
           <button onClick={() => this.props.deleteTaskInfo(this.props.taskData._id)}>Delete</button>
-          {/* <span className="timestamp">{this.props.timestamp}</span> */}
         </div>
       </li> 
     )
   }
 }
 
-
-//this.props.taskData.description,

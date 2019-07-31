@@ -15,13 +15,11 @@ export default class LookContainer extends Component {
       clientID: this.props.clientID,
     }
     this.service = new AuthServices();
-    // console.log(this.state.looksData)
   }
 
   updateNewLookDescription(e) {
     let regexp = e.target.value
     regexp.replace(/^ +/gm, '')
-    console.log(regexp)
     this.setState({
       ...this.state,
       newLookDescription: regexp
@@ -61,7 +59,6 @@ export default class LookContainer extends Component {
   }
 
   render() {
-    //console.log(this.state.looksData)
     return (
       <section className="looks-collection">
         <form onSubmit={this.addNewLook} encType="multipart/form-data">
@@ -79,7 +76,7 @@ export default class LookContainer extends Component {
 
         {(this.state.looksData) ?
           <LookList looks={this.state.looksData} />
-          : null
+          : <h3>Loading...</h3>
         }
 
       </section>

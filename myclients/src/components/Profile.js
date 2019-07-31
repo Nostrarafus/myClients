@@ -49,7 +49,6 @@ export default class Profile extends Component {
 
     this.service.addClient(clientName)
       .then(response => {
-        // console.log(response)
         this.setState({
           ...this.state,
           addClient: "",
@@ -74,7 +73,6 @@ export default class Profile extends Component {
     e.preventDefault()
     this.service.addUserPicture(this.state.file)
       .then(response => {
-         console.log(response)
         this.setState({
           ...this.state,
           file: null,
@@ -91,8 +89,6 @@ export default class Profile extends Component {
 
 
   handlePhotoChange(e) {
-    // console.log("archivos seleccionado")
-    // console.log(e.target.files[0])
     this.setState({
       ...this.state,
       file: e.target.files[0]

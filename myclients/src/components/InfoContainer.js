@@ -18,19 +18,6 @@ export default class InfoContainer extends Component {
   }
 
 
-  // getInfos() {
-  //   const clientID = this.state.clientID
-  //   this.service.getLooks(clientID)
-  //     .then(allInfo => {
-  //       console.log(allInfo)
-  //         this.setState({
-  //           ...this.state,
-  //           infoData: allInfo
-  //         })
-  //       })
-  // }
-
-
   addNewInfo(e) {
     const newInfo = this.state.newInfoDescription
     const clientID = this.state.clientID
@@ -38,7 +25,6 @@ export default class InfoContainer extends Component {
     if (e.key === 'Enter') {
       this.service.addNewInfo(newInfo, clientID, infoTitle)
         .then(response => {
-          console.log(response.infoData)
           this.setState({
             ...this.state,
             newInfoDescription: "",
@@ -58,7 +44,6 @@ export default class InfoContainer extends Component {
   updateNewInfoDescription(e) {
     let regexp = e.target.value
     regexp.replace(/^ +/gm, '')
-    console.log(regexp)
     this.setState({
       ...this.state,
       newInfoDescription: regexp
@@ -68,7 +53,6 @@ export default class InfoContainer extends Component {
   deleteInfo = (info, infoID) => {
     this.service.deleteInfo(info, infoID)
       .then(response => {
-        console.log(response.infoData)
         this.setState({
           ...this.state,
           infoData: response.infoData,
@@ -83,7 +67,6 @@ export default class InfoContainer extends Component {
 
 
   render() {
-    console.log(this.state.infoData)
     return (
       <section className="info-collection">
 
@@ -103,7 +86,7 @@ export default class InfoContainer extends Component {
             deleteInfo={this.deleteInfo}
           //updateInfo={this.updateInfo}
           />
-          : null
+          : <h3>Loading...</h3>
         }
 
 

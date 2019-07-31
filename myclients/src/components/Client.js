@@ -26,7 +26,6 @@ export default class Client extends Component {
     const clientID = params.id
     this.service.getSingleClient(clientID)
       .then(response => {
-        // console.log(response)
         this.setState({
           ...this.state,
           clientData: response
@@ -44,11 +43,8 @@ export default class Client extends Component {
     }
     const { params } = this.props.match;
     const clientID = params.id
-    console.log(clientID)
-    console.log(infoTitle)
     this.service.addNewInfoBox(infoTitle, clientID)
       .then(response => {
-        console.log(response)
         this.setState({
           ...this.state,
           clientData: response
@@ -63,7 +59,6 @@ export default class Client extends Component {
     const clientName = this.state.clientData.clientName
     this.service.addClientPicture(this.state.file, clientID, clientName)
       .then(response => {
-        console.log(response)
         this.setState({
           ...this.state,
           file: null,
@@ -74,8 +69,6 @@ export default class Client extends Component {
 
 
   handlePhotoChange(e) {
-    // console.log("archivos seleccionado")
-    // console.log(e.target.files[0])
     this.setState({
       ...this.state,
       file: e.target.files[0]
@@ -85,7 +78,7 @@ export default class Client extends Component {
 
 
   render() {
-    console.log(this.state.clientData)
+
     return (
       <div>
         <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
@@ -96,7 +89,7 @@ export default class Client extends Component {
             <React.Fragment>
               <h1>Cliente {this.state.clientData.clientName}</h1>
             </React.Fragment>
-            : null
+            : <h3>Loading...</h3>
         }
         {
           (this.state.clientData)
@@ -114,7 +107,7 @@ export default class Client extends Component {
                   : ""}
               </div>
             </React.Fragment>
-            : null
+            : <h3>Loading...</h3>
         }
 
         <div className="looksInClient">
@@ -127,7 +120,7 @@ export default class Client extends Component {
                   looksData={this.state.clientData.looks}>
                 </LookContainer>
               </React.Fragment>
-              : null
+              : <h3>Loading...</h3>
           }
         </div>
         <div className="infosInClient">
@@ -151,7 +144,7 @@ export default class Client extends Component {
                 <button onClick={() => this.addNewInfoBox()}>Add a new Infobox for your client</button>
               </React.Fragment>
 
-              : null
+              : <h3>Loading...</h3>
           }
         </div>
         <div className="taskContainer">
@@ -165,7 +158,7 @@ export default class Client extends Component {
                 />
 
               </React.Fragment>
-              : null
+              : <h3>Loading...</h3>
           }
         </div>
       </div>

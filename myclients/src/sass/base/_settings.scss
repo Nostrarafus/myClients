@@ -1,0 +1,18 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+$colors: (
+  red: #ee7879,
+  blue: #2a3166,
+  pink: #f4abaa,
+  green: #cae7df,
+  white: #ffffff
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+//FONTS
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap");
+$family-font: "Lato", sans-serif;

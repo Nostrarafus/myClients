@@ -3,7 +3,6 @@ import InfoSingle from './InfoSingle';
 
 export default class InfoList extends Component {
   render() {
-    //console.log(this.props)
     return (
       <ol className="infos-list">
         {
@@ -14,7 +13,6 @@ export default class InfoList extends Component {
               infoData={info}
               infoID={this.props.infoID}
               deleteInfo={this.props.deleteInfo}
-              //updateInfo={this.props.updateInfo}
             >
             </InfoSingle>
           )

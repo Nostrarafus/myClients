@@ -20,7 +20,6 @@ export default class TaskContainer extends Component {
     chosenTask[property] = !chosenTask[property]
     this.service.toggleTask(taskID, clientID, chosenTask.done, chosenTask.favourited)
       .then(response => {
-        //console.log(response)
         this.setState({
           ...this.state,
           taskData: response.tasks,
@@ -31,7 +30,6 @@ export default class TaskContainer extends Component {
   updateNewTaskString(e) {
     let regexp = e.target.value
     regexp.replace(/^ +/gm, '')
-    console.log(regexp)
     this.setState({
       ...this.state,
       newTaskDescription: regexp
@@ -73,7 +71,6 @@ export default class TaskContainer extends Component {
   }
 
   render() {
-    console.log(this.state.taskData)
     return (
       <section className="task-collection">
         <input type="text"
@@ -91,7 +88,7 @@ export default class TaskContainer extends Component {
             deleteTaskInfo={this.deleteTaskInfo}
           >
           </TaskList>
-          : null
+          : <h3>Loading...</h3>
         }
       </section>
     )
