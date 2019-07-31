@@ -18,15 +18,20 @@ export default class LookSingle extends Component {
   }
 
   render() {
-     //console.log(this.props)
+    //  console.log(this.props)
     return (
-      <li className="singleInfo">
-        <div className="description-time-wrapper">
-          {(this.props) ?
+      <li className={this.state.infoID + "singleInfo"}>
+
+        {(this.props) ?
+          <div className="description-wrapper">
             <p>{this.props.infoData}</p>
-            : null}
-          {/* <span className="timestamp">{this.state.timeStamp}</span> */}
-        </div>
+            <button onClick={this.props.deleteInfo}>Edit</button>
+            <button onClick={() => this.props.deleteInfo(this.props.infoData, this.props.infoID)}>Delete</button>
+          </div>
+          : null
+        }
+        {/* <span className="timestamp">{this.state.timeStamp}</span> */}
+
       </li>
     )
   }

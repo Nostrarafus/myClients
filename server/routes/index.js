@@ -71,7 +71,14 @@ router.post('/users/Userpic', uploadCloud.single('photo'), (req, res, next) => {
     })
 });
 
-
+router.post('/deleteInfo', (req, res, next) => {
+  const info = req.body.info
+  const infoID = req.body.infoID
+  console.log(infoID)
+  ClientInfo.findByIdAndUpdate(infoID, { $pull: { infoData: info } }, { new: true })
+    .then((info) => { res.json(info) })
+    .catch(err => console.log("Hubo un error!", err))
+});
 
 router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, next) => {
   const imgPath = req.file.url
@@ -84,7 +91,6 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
     picture: imgPath,
   })
     .then((look) => {
-      let sentLook = look
       Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
         .populate("looks")
         .then((clientData) => { res.json(clientData) })
@@ -111,14 +117,26 @@ router.post(`/client/:id/addNewInfo`, (req, res, next) => {
   ClientInfo.findOneAndUpdate({ infoTitle: infoTitle, client: client }, { $push: { infoData: info } }, { new: true })
     .then((info) => {
       console.log(info)
-      const newInfo = info
-      Client.findOneAndUpdate({ _id: client }, { $push: { infos: info._id } }, { new: true })
-        .then(() => { res.json(newInfo) })
-        .catch(err => console.log("Hubo un error!", err))
+      res.json(info)
     }).catch(err => console.log("Hubo un error!", err))
 })
 
-
+router.post(`/addNewInfoBox`, (req, res, next) => {
+  const infoTitle = req.body.infoTitle
+  const clientID = req.body.clientID
+  console.log(infoTitle)
+  console.log(clientID)
+  ClientInfo.create({
+    client: clientID,
+    infoTitle: infoTitle,
+  }).then((info) => {
+    console.log(info)
+    Client.findByIdAndUpdate(clientID, { $push: { infos: info._id } }, { new: true })
+      .populate("infos")
+      .then((client) => res.json(client))
+      .catch(err => console.log("Hubo un error!", err))
+  }).catch(err => console.log("Hubo un error!", err))
+})
 
 // router.get(`/client/:id/allLooks`, (req, res, next) => {
 //   const client = req.params.id

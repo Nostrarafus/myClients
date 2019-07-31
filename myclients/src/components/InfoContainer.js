@@ -15,7 +15,7 @@ export default class InfoContainer extends Component {
     }
     this.service = new AuthServices();
 
-    console.log(this.state)
+
   }
 
 
@@ -30,6 +30,7 @@ export default class InfoContainer extends Component {
   //         })
   //       })
   // }
+
 
   addNewInfo(e) {
     const newInfo = this.state.newInfoDescription
@@ -62,8 +63,28 @@ export default class InfoContainer extends Component {
     })
   }
 
+  deleteInfo = (info, infoID) => {
+    // console.log(info)
+    // console.log(infoID)
+    // let chosenInfo = this.state.infoData.filter(infoData => infoData !== info)
+    this.service.deleteInfo(info, infoID)
+      .then(response => {
+        console.log(response.infoData)
+        this.setState({
+          ...this.state,
+          infoData: response.infoData,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          error: true
+        });
+      })
+  }
+
 
   render() {
+    console.log(this.state.infoData)
     return (
       <section className="info-collection">
 
@@ -77,7 +98,10 @@ export default class InfoContainer extends Component {
         />
 
         {(this.state.infoData) ?
-          <InfoList infoData={this.state.infoData} infoID={this.state.infoID} />
+          <InfoList
+            infoData={this.state.infoData}
+            infoID={this.state.infoID}
+            deleteInfo={this.deleteInfo} />
           : null
         }
 

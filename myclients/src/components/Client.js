@@ -16,9 +16,6 @@ export default class Client extends Component {
 
   componentDidMount() {
     this.getSingleClient();
-    setTimeout(() => {
-      this.sendCorrectInfo();
-    }, 200);
   }
 
   getSingleClient = () => {
@@ -26,7 +23,7 @@ export default class Client extends Component {
     const clientID = params.id
     this.service.getSingleClient(clientID)
       .then(response => {
-       // console.log(response)
+        // console.log(response)
         this.setState({
           ...this.state,
           clientData: response
@@ -37,13 +34,33 @@ export default class Client extends Component {
       })
   }
 
-  sendCorrectInfo = () => {
-    //console.log(this.state.clientData)
-
+  addNewInfoBox() {
+    let infoTitle
+    let popUp = prompt("Please name the new info box", "Favourite movies")
+    if (popUp === null || popUp === "") {
+      infoTitle = undefined;
+    } else {
+      infoTitle = popUp;
+    }
+    const { params } = this.props.match;
+    const clientID = params.id
+    console.log(clientID)
+    console.log(infoTitle)
+    this.service.addNewInfoBox(infoTitle, clientID)
+      .then(response => {
+        console.log(response)
+        this.setState({
+          ...this.state,
+          clientData: response
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render() {
-    console.log(this.state.clientData)
+     console.log(this.state.clientData)
     return (
       <div>
         <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
@@ -75,10 +92,10 @@ export default class Client extends Component {
               ?
               <React.Fragment>
                 {
-                  this.state.clientData.infos.map(info => {
+                  this.state.clientData.infos.map((info, idx) => {
                     return (
                       <InfoContainer
-                        key={info._id}
+                        key={idx}
                         clientID={this.state.clientData._id}
                         infoData={info.infoData}
                         infoTitle={info.infoTitle}
@@ -86,6 +103,8 @@ export default class Client extends Component {
                     )
                   })
                 }
+
+                <button onClick={() => this.addNewInfoBox()}>Add a new Infobox for your client</button>
               </React.Fragment>
 
               : null

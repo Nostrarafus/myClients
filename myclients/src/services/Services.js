@@ -73,7 +73,7 @@ export default class AuthServices {
   }
 
   getSingleClient = (clientID) => {
-    return this.service.post(`/clientData`, {clientID})
+    return this.service.post(`/clientData`, { clientID })
       .then(response => response.data)
       .catch(errHandler);
   }
@@ -94,6 +94,18 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
+  addNewInfoBox = (infoTitle, clientID) => {
+    return this.service.post(`/addNewInfoBox`, { infoTitle, clientID })
+      .then(response => response.data)
+      .catch(errHandler);
+  }
+
+  deleteInfo = (info, infoID) => {
+    console.log(info)
+    return this.service.post(`/deleteInfo`, { info, infoID })
+      .then(response => response.data)
+      .catch(errHandler);
+  }
 
 }
 

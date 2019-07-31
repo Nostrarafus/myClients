@@ -92,7 +92,6 @@ export default class Profile extends Component {
   handlePhotoChange(e) {
     // console.log("archivos seleccionado")
     // console.log(e.target.files[0])
-
     this.setState({
       ...this.state,
       file: e.target.files[0]
@@ -128,7 +127,11 @@ export default class Profile extends Component {
           <button type="submit">Update your profile pic</button>
         </form>
         <div className="userPic">
-          {(this.state.userData.picture) ? <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} /> : ""}
+          {(this.state.userData.picture) ? 
+          <React.Fragment>
+          <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} /> 
+          </React.Fragment>
+          : ""}
         </div>
 
 
