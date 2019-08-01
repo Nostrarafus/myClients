@@ -90,10 +90,10 @@ export default class Profile extends Component {
 
   render() {
     //console.log(this.state.userData)
-     console.log(this.state.allClients)  
+    console.log(this.state.allClients)
     return (
       <div>
-         <Button className="logoutbutton" onClick={this.props.logout} variant="outline-secondary">Logout</Button>
+        <Button className="logoutbutton" onClick={this.props.logout} variant="outline-secondary">Logout</Button>
         <h3 className="elegantshadow" id="userName">Bienvenido {this.state.userData.username}</h3>
         <section className="addClientWrapper">
           <h4>Add a new client:</h4>
@@ -116,13 +116,13 @@ export default class Profile extends Component {
           }
         </div>
         <div className="userPicandForm">
-        <div className="userPicFormWrapper">
-          <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
-            <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
-            <button type="submit">Update your profile pic</button>
-          </form>
-        </div>
-        
+          <div className="userPicFormWrapper">
+            <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
+              <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
+              <button type="submit">Update your profile pic</button>
+            </form>
+          </div>
+
           {(this.state.userData.picture) ?
             <React.Fragment>
               <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
