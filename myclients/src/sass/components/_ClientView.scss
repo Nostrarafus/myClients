@@ -1,7 +1,6 @@
-.clientview {
-  margin: 50px auto;
-  text-align: center;
-}
+// .clientview {
+//   text-align: center;
+// }
 .clientview .coolName {
   text-decoration: none;
   -webkit-transform: perspective(2.5em) rotateX(15deg) scaleY(0.8);
@@ -34,14 +33,6 @@
   text-shadow: 0 -1px 15px black, 0 1px 0 #7f6303, 0 2px 0 #846703, 0 0px 0 #896b03, 0 1px 0 #8e6f03, 0 2px 0 #937203, 0 2px 30px rgba(252, 223, 92, 0.6);
 }
 
-.clientViewWrapper{
-  display: grid;
-  grid-gap: 20px;
-  grid-template-rows: repeat(auto-fill, 150px);
-  // justify-content: space-around;
-  // grid-template-columns: repeat(auto-fit, 150px);
-  // grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
-}
 
 .clientviewpic{
   height: 60px;

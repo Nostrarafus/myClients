@@ -3,7 +3,7 @@ import AuthServices from '../services/Services';
 import Clientview from './ClientView';
 import { Link } from 'react-router-dom';
 import ZoomImg from './ZoomImg'
-
+import Button from 'react-bootstrap/Button'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -11,7 +11,6 @@ export default class Profile extends Component {
     this.state = {
       addClient: "",
       allClients: [],
-      //  userPhoto: {},
       file: null,
       userData: {},
     }
@@ -79,12 +78,6 @@ export default class Profile extends Component {
           userData: response,
         });
       })
-      .catch(error => {
-        this.setState({
-          file: this.state.file,
-          error: true
-        });
-      })
   }
 
 
@@ -100,8 +93,8 @@ export default class Profile extends Component {
      console.log(this.state.allClients)  
     return (
       <div>
-        <button onClick={this.props.logout}>Logout</button>
-        <h3 className="elegantshadow">Bienvenido {this.state.userData.username}</h3>
+         <Button className="logoutbutton" onClick={this.props.logout} variant="outline-secondary">Logout</Button>
+        <h3 className="elegantshadow" id="userName">Bienvenido {this.state.userData.username}</h3>
         <section className="addClientWrapper">
           <h4>Add a new client:</h4>
           <form onSubmit={this.handleFormSubmit}>

@@ -48,12 +48,6 @@ export default class TaskContainer extends Component {
             taskData: response.tasks,
           });
         })
-        .catch(error => {
-          this.setState({
-            newInfoDescription: newTask,
-            error: true
-          });
-        })
     }
   }
 

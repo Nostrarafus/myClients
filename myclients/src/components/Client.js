@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+
 import AuthServices from '../services/Services'
 import LookContainer from './LookContainer';
 import InfoContainer from './InfoContainer';
 import TaskContainer from './TaskContainer';
 import ZoomImg from './ZoomImg';
 import MyContainer from './MyPoseContainer';
+import Button from 'react-bootstrap/Button'
 
 
 export default class Client extends Component {
@@ -83,8 +85,8 @@ export default class Client extends Component {
 
     return (
       <div>
-        <h5><Link to={'/profile'}>Volver al perfil</Link></h5>
-
+        <h5><Link to={'/profile'}>Volver a tu perfil</Link></h5>
+<div className="client-name-pic-wrapper">
         {
           (this.state.clientData)
             ?
@@ -97,34 +99,42 @@ export default class Client extends Component {
           (this.state.clientData)
             ?
             <React.Fragment>
-             
-                <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
-                  <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
-                  <button type="submit">Update your {this.state.clientData.clientName} pic</button>
-                </form>
-                <div className="clientPic">
-                  {(this.state.clientData.picture) ?
-                    <React.Fragment>
-                       {/* <MyContainer className={"clientPicContainer"}> */}
-                      <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
-                      {/* </MyContainer> */}
-                    </React.Fragment>
-                    : ""}
-                </div>
-           
+              <div className="clientPic">
+                {(this.state.clientData.picture) ?
+                  <React.Fragment>
+                    {/* <MyContainer className={"clientPicContainer"}> */}
+                    <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
+                    {/* </MyContainer> */}
+                  </React.Fragment>
+                  : ""}
+              </div>
+
             </React.Fragment>
             : <h3 className="elegantshadow">Loading...</h3>
         }
+        </div>
+        {
+           (this.state.clientData)
+           ?
+           <React.Fragment> 
+              <form onSubmit={(e) => this.handlePhotoSubmit(e)} className="clientPicForm">
+                <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> 
+                <Button type="submit" variant="outline-info">Update your {this.state.clientData.clientName} pic</Button>
+              </form>
+           </React.Fragment>
+        :<h3>Loading...</h3>
+        }
 
         <div className="looksInClient">
+          <h5>What where you wearing the last visits:</h5>
           {
             (this.state.clientData)
               ?
               <React.Fragment>
-                  <LookContainer
-                    clientID={this.state.clientData._id}
-                    looksData={this.state.clientData.looks}>
-                  </LookContainer>
+                <LookContainer
+                  clientID={this.state.clientData._id}
+                  looksData={this.state.clientData.looks}>
+                </LookContainer>
               </React.Fragment>
               : <h3>Loading...</h3>
           }
@@ -134,6 +144,7 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
+                 <div className="col-lg-12 text-center">
                 {
                   this.state.clientData.infos.map((info, idx) => {
                     return (
@@ -148,8 +159,10 @@ export default class Client extends Component {
                     )
                   })
                 }
-
-                <button onClick={() => this.addNewInfoBox()}>Add a new Infobox for your client</button>
+                </div>
+                <div className="col-lg-12 text-center">
+                <Button  onClick={() => this.addNewInfoBox()} type="submit" variant="outline-info">Add a new Infobox for your client</Button>
+                </div>
               </React.Fragment>
 
               : <h3 className="elegantshadow">Loading...</h3>
@@ -160,11 +173,11 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-              
-                  <TaskContainer
-                    taskData={this.state.clientData.tasks}
-                    clientID={this.state.clientData._id}
-                  />
+
+                <TaskContainer
+                  taskData={this.state.clientData.tasks}
+                  clientID={this.state.clientData._id}
+                />
 
               </React.Fragment>
               : <h3 className="elegantshadow">Loading...</h3>

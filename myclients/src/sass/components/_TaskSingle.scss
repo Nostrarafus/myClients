@@ -9,7 +9,7 @@
 }
 
 .task .done {
-  --dimensions: 31px;
+  --dimensions: 20px;
   background-image: url(/src/img/checkbox-enabled.png);
   height: var(--dimensions);
   width: var(--dimensions);
@@ -17,7 +17,7 @@
 }
 
 .task .favourite {
-  --dimensions: 31px;
+  --dimensions: 20px;
   height: var(--dimensions);
   width: var(--dimensions);
   margin-right: 1.5rem;

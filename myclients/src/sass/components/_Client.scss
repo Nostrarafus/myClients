@@ -1,12 +1,9 @@
-// .clientPicContainer {
-//   display: grid;
-//   grid-template-columns: 200px 500px 200px;
-//   grid-template-rows: 200px 100px 400px 300px;
-//   grid-gap: 20px;    
-// }
-
-
-// .infoContainer{
-//    display: flex;
-//    flex-direction: row
-// }
+.client-name-pic-wrapper{
+  display: flex;
+  justify-content: space-between;
+  background-color: #d5d5d5;
+}
+.clientPicForm{
+  display: flex;
+  justify-content: space-between;
+}

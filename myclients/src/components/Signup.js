@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthServices from '../services/Services'
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 export default class Signup extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export default class Signup extends Component {
     return (
       <React.Fragment>
          <h2  className="elegantshadow">Signup to MyClients APP </h2>
+         <section className="loginBox">
         <Form onSubmit={this.handleFormSubmit}>
           <Form.Group controlId="formGroupUserName">
             <Form.Label>Username</Form.Label>
@@ -55,12 +57,13 @@ export default class Signup extends Component {
             <Form.Control type="password" placeholder="Password" name="password"
               value={this.state.password} onChange={e => this.handleChange(e)} />
           </Form.Group>
-          <input type="submit" value="Login" />
+          <Button type="submit" variant="outline-primary">Signup</Button>
         </Form>
 
         <p>Already have account?
-          <Link to={"/login"}> Login</Link>
+          <Link to={"/login"}><p>Login</p> </Link>
         </p>
+        </section>
       </React.Fragment>
     )
   }

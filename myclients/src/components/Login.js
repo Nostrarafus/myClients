@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AuthServices from '../services/Services';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 class Login extends Component {
   constructor(props) {
@@ -30,8 +31,8 @@ class Login extends Component {
   render() {
     return (
       <React.Fragment >
-        <section className="logincontainer">
         <h2  className="elegantshadow">Login to MyClients APP </h2>
+        <section className="loginBox">
       <Form onSubmit={this.handleFormSubmit}>
         <Form.Group controlId="formGroupUserName">
           <Form.Label>Username</Form.Label>
@@ -43,11 +44,12 @@ class Login extends Component {
           <Form.Control type="password" placeholder="Password" name="password" 
             value={this.state.password} onChange={e => this.handleChange(e)} />
         </Form.Group>
-        <input type="submit" value="Login" />
+        <Button type="submit" variant="outline-primary">Login</Button>
+
       </Form>
 
       <p>Don't have account?
-            <Link to={"/signup"}> Signup</Link>
+            <Link to={"/signup"}> <p>Signup</p> </Link>
         </p>
         </section>
       </React.Fragment>

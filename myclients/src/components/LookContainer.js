@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import AuthServices from '../services/Services';
 import LookList from './LookList';
-import MyContainer from './MyPoseContainer';
+// import MyContainer from './MyPoseContainer';
+import Button from 'react-bootstrap/Button'
 
 export default class LookContainer extends Component {
   constructor(props) {
@@ -39,13 +40,6 @@ export default class LookContainer extends Component {
           looksData: response.looks
         });
       })
-      .catch(error => {
-        this.setState({
-          newLookDescription: newLook,
-          newLookFile: lookPic,
-          error: true
-        });
-      })
   }
 
 
@@ -59,7 +53,7 @@ export default class LookContainer extends Component {
   render() {
     return (
       <section className="looks-collection">
-        <form onSubmit={this.addNewLook} encType="multipart/form-data">
+        <form onSubmit={this.addNewLook} encType="multipart/form-data" className="looksForm">
           <input type="text"
             placeholder="Add a new Look description"
             className="add-new-look"
@@ -67,15 +61,14 @@ export default class LookContainer extends Component {
             onChange={(e) => this.updateNewLookDescription(e)}
           />
 
-          <input type="file" placeholder="add your look pic" onChange={(e) => this.handlePhotoChange(e)} /> <br />
-
-          <input type="submit" value="add your cool look" />
+          <input type="file" placeholder="choose your look pic" onChange={(e) => this.handlePhotoChange(e)} />
+          <Button type="submit"  variant="outline-success">add your cool look</Button>
         </form>
 
         {(this.state.looksData) ?
-          <MyContainer>
+          // <MyContainer>
             <LookList looks={this.state.looksData} />
-          </MyContainer>
+          // </MyContainer>
           : <h5>Loading...</h5>
         }
 

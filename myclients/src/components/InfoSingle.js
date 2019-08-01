@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from "moment";
+import Button from 'react-bootstrap/Button'
 
 export default class LookSingle extends Component {
   constructor(props) {
@@ -20,11 +21,13 @@ export default class LookSingle extends Component {
   render() {
     return (
       <li className={this.state.infoID + "singleInfo"}>
-
         {(this.props) ?
           <div className="description-wrapper">
             <p>{this.props.infoData}</p>
-            <button onClick={() => this.props.deleteInfo(this.props.infoData, this.props.infoID)}>Delete</button>
+            <Button size="sm" onClick={() => this.props.deleteInfo(this.props.infoData, this.props.infoID)}
+        variant="outline-danger" >Delete</Button>
+            {/* <button onClick={() => this.props.deleteInfo(this.props.infoData, this.props.infoID)}>
+              Delete</button> */}
           </div>
           : null
         }

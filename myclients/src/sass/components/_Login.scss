@@ -20,3 +20,68 @@ h2 {
   text-rendering: optimizeLegibility;
 }
 
+
+
+.loginBox {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 380px;
+  padding: 80px 40px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.5);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.loginBox p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.loginBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+  background: #ff267e;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.loginBox input[type="submit"]:hover {
+background: #efed40;
+color: #262626;
+}
+
+.loginBox a{
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+

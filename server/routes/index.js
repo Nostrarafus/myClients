@@ -16,7 +16,7 @@ router.post('/addClient', (req, res, next) => {
     clientName: client,
     picture:{
       imgName:"default",
-      imgPath:"https://icon-library.net/images/default-user-icon/default-user-icon-4.jpg"
+      imgPath:"https://www.uic.mx/posgrados/files/2018/05/default-user.png"
     }
   })
     .then((client) => {
