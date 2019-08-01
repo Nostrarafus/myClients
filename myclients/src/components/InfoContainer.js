@@ -31,12 +31,6 @@ export default class InfoContainer extends Component {
             infoData: response.infoData,
           });
         })
-        .catch(error => {
-          this.setState({
-            newInfoDescription: newInfo,
-            error: true
-          });
-        })
     }
   }
 
@@ -56,11 +50,6 @@ export default class InfoContainer extends Component {
         this.setState({
           ...this.state,
           infoData: response.infoData,
-        });
-      })
-      .catch(error => {
-        this.setState({
-          error: true
         });
       })
   }
@@ -84,7 +73,6 @@ export default class InfoContainer extends Component {
             infoData={this.state.infoData}
             infoID={this.state.infoID}
             deleteInfo={this.deleteInfo}
-          //updateInfo={this.updateInfo}
           />
           : <h3>Loading...</h3>
         }

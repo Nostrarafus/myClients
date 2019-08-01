@@ -91,7 +91,7 @@ export default class Client extends Component {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <h3 className="retroshadow">Perfil de {this.state.clientData.clientName}</h3>
+              <h3 className="deepshadow">Perfil de {this.state.clientData.clientName}</h3>
             </React.Fragment>
             : <h3 className="">Loading...</h3>
         }
@@ -99,11 +99,11 @@ export default class Client extends Component {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <div className="clientPic">
+              <div>
                 {(this.state.clientData.picture) ?
                   <React.Fragment>
                     {/* <MyContainer className={"clientPicContainer"}> */}
-                    <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
+                    <ZoomImg  className="clientPic" src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
                     {/* </MyContainer> */}
                   </React.Fragment>
                   : ""}

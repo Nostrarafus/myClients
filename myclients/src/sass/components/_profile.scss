@@ -20,3 +20,8 @@ justify-content: center;
   grid-template-rows: 200px 
 }
 
+.userPicFormWrapper{
+display: flex;
+flex-direction: column;
+align-items: start;
+}

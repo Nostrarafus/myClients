@@ -14,9 +14,9 @@ router.post('/addClient', (req, res, next) => {
   Client.create({
     owner: currentuser,
     clientName: client,
-    picture:{
-      imgName:"default",
-      imgPath:"https://www.uic.mx/posgrados/files/2018/05/default-user.png"
+    picture: {
+      imgName: "default",
+      imgPath: "https://www.uic.mx/posgrados/files/2018/05/default-user.png"
     }
   })
     .then((client) => {
@@ -121,6 +121,17 @@ router.post('/deleteInfo', (req, res, next) => {
   ClientInfo.findByIdAndUpdate(infoID, { $pull: { infoData: info } }, { new: true })
     .then((info) => { res.json(info) })
     .catch(err => console.log("Hubo un error!", err))
+});
+router.post('/deleteLook', (req, res, next) => {
+  const lookID = req.body.lookID
+  const clientID = req.body.clientID
+  Looks.deleteOne({ _id: lookID })
+    .then(() => {
+      Client.findById(clientID)
+        .populate("looks")
+        .then((task) => { res.json(task) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
 });
 
 router.post('/deleteTaskInfo', (req, res, next) => {

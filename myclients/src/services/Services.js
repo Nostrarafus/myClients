@@ -118,6 +118,11 @@ export default class AuthServices {
       .then(response => response.data)
       .catch(errHandler);
   }
+  deleteLook = (lookID,clientID) => {
+    return this.service.post(`/deleteLook`, { lookID, clientID })
+      .then(response => response.data)
+      .catch(errHandler);
+  }
 
   toggleTask = (taskID, clientID, done, fav) => {
     return this.service.post(`/toggle`, { taskID, clientID, done, fav })

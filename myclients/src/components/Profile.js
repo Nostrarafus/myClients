@@ -115,20 +115,20 @@ export default class Profile extends Component {
             })
           }
         </div>
-        <div className="userPicandForm">
-          <div className="userPicFormWrapper">
-            <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
-              <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
-              <button type="submit">Update your profile pic</button>
-            </form>
-          </div>
 
-          {(this.state.userData.picture) ?
-            <React.Fragment>
-              <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
-            </React.Fragment>
-            : ""}
-        </div>
+
+        <form className="userPicFormWrapper" onSubmit={(e) => this.handlePhotoSubmit(e)}>
+          <Button type="submit" variant="outline-success">Update your profile pic</Button>
+          <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
+        </form>
+
+
+        {(this.state.userData.picture) ?
+          <React.Fragment>
+            <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
+          </React.Fragment>
+          : ""}
+
 
 
       </div>

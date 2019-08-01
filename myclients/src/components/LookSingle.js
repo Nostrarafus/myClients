@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import ZoomImg from './ZoomImg';
 import moment from "moment";
+import Button from 'react-bootstrap/Button'
+
 
 
 
 export default class LookSingle extends Component {
-  constructor() {
-    super()
-    this.state={
-      timeStamp: null
+  constructor(props) {
+    super(props)
+    this.state = {
+      timeStamp: null,
+      lookID: this.props,
     }
   }
 
@@ -21,13 +24,17 @@ export default class LookSingle extends Component {
 
   render() {
     return (
-      <li className="singleLook">
-        <div className="img-description-time-wrapper">
-          <ZoomImg className="lookPic" src={this.props.picture} />
+      <div className="singleLook">
+        <div className="lookPicDiv">
+        <ZoomImg className="lookPic" src={this.props.picture} />
+        </div>
+        <div className="description-time-wrapper">
           <p>Description: {this.props.lookDescription}</p>
           <span className="timestamp">{this.state.timeStamp}</span>
+          <Button size="sm" onClick={() => this.props.deleteLook(this.props._id)}
+            variant="outline-danger" >Delete</Button>
         </div>
-      </li>
+      </div>
     )
   }
 }

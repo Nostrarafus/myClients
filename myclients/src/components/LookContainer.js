@@ -43,6 +43,17 @@ export default class LookContainer extends Component {
   }
 
 
+  deleteLook = (lookID) => {
+    const clientID = this.state.clientID
+    this.service.deleteLook(lookID, clientID)
+      .then(response => {
+        this.setState({
+          ...this.state,
+          looksData: response.looks,
+        });
+      })
+  }
+
   handlePhotoChange(e) {
     this.setState({
       ...this.state,
@@ -62,13 +73,14 @@ export default class LookContainer extends Component {
           />
 
           <input type="file" placeholder="choose your look pic" onChange={(e) => this.handlePhotoChange(e)} />
-          <Button type="submit"  variant="outline-success">add your cool look</Button>
+          <Button type="submit" variant="outline-success">add your cool look</Button>
         </form>
 
         {(this.state.looksData) ?
-          // <MyContainer>
-            <LookList looks={this.state.looksData} />
-          // </MyContainer>
+          <LookList
+            looks={this.state.looksData}
+            deleteLook={this.deleteLook}
+          />
           : <h5>Loading...</h5>
         }
 
