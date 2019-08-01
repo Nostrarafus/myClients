@@ -14,7 +14,8 @@
     "react-pose": "^4.0.8",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "shards-react": "^1.0.3"
+    "shards-react": "^1.0.3",
+    "styled-components": "^4.3.2"
   },
   "scripts": {
     "start": "dotenv -e .env.dev react-scripts start",

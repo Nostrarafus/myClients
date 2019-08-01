@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import AuthServices from '../services/Services';
 import LookList from './LookList';
 
-
-
-
 export default class LookContainer extends Component {
   constructor(props) {
     super(props)

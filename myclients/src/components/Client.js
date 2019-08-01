@@ -5,6 +5,7 @@ import LookContainer from './LookContainer';
 import InfoContainer from './InfoContainer';
 import TaskContainer from './TaskContainer';
 import ZoomImg from './ZoomImg';
+import MyContainer from './MyPoseContainer';
 
 export default class Client extends Component {
   constructor() {
@@ -95,17 +96,19 @@ export default class Client extends Component {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
-                <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
-                <button type="submit">Update your {this.state.clientData.clientName} pic</button>
-              </form>
-              <div className="clientPic">
-                {(this.state.clientData.picture) ?
-                  <React.Fragment>
-                    <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
-                  </React.Fragment>
-                  : ""}
-              </div>
+              <MyContainer>
+                <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
+                  <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
+                  <button type="submit">Update your {this.state.clientData.clientName} pic</button>
+                </form>
+                <div className="clientPic">
+                  {(this.state.clientData.picture) ?
+                    <React.Fragment>
+                      <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
+                    </React.Fragment>
+                    : ""}
+                </div>
+              </MyContainer>
             </React.Fragment>
             : <h3>Loading...</h3>
         }
@@ -115,10 +118,12 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-                <LookContainer
-                  clientID={this.state.clientData._id}
-                  looksData={this.state.clientData.looks}>
-                </LookContainer>
+                <MyContainer>
+                  <LookContainer
+                    clientID={this.state.clientData._id}
+                    looksData={this.state.clientData.looks}>
+                  </LookContainer>
+                </MyContainer>
               </React.Fragment>
               : <h3>Loading...</h3>
           }
@@ -131,12 +136,14 @@ export default class Client extends Component {
                 {
                   this.state.clientData.infos.map((info, idx) => {
                     return (
-                      <InfoContainer
-                        key={idx}
-                        clientID={this.state.clientData._id}
-                        infoData={info.infoData}
-                        infoTitle={info.infoTitle}
-                        infoID={info._id} />
+                      <MyContainer key={idx}>
+                        <InfoContainer
+                          key={idx}
+                          clientID={this.state.clientData._id}
+                          infoData={info.infoData}
+                          infoTitle={info.infoTitle}
+                          infoID={info._id} />
+                      </MyContainer>
                     )
                   })
                 }
@@ -152,11 +159,12 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-                <TaskContainer
-                  taskData={this.state.clientData.tasks}
-                  clientID={this.state.clientData._id}
-                />
-
+                <MyContainer>
+                  <TaskContainer
+                    taskData={this.state.clientData.tasks}
+                    clientID={this.state.clientData._id}
+                  />
+                </MyContainer>
               </React.Fragment>
               : <h3>Loading...</h3>
           }

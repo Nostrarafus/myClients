@@ -14,7 +14,7 @@ const Frame = posed.div({
   zoomedOut: {
     applyAtEnd: { display: "none" },
     opacity: 0
-  }
+  } 
 });
 
 const Image = posed.img({
