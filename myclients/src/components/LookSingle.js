@@ -23,7 +23,7 @@ export default class LookSingle extends Component {
     return (
       <li className="singleLook">
         <div className="img-description-time-wrapper">
-          <ZoomImg src={this.props.picture} />
+          <ZoomImg className="lookPic" src={this.props.picture} />
           <p>Description: {this.props.lookDescription}</p>
           <span className="timestamp">{this.state.timeStamp}</span>
         </div>

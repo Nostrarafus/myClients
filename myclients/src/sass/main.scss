@@ -1,9 +1,12 @@
 @import "./base/settings";
 @import "./base/font-size";
 @import "./base/reset";
+@import "./base/helpers";
+@import "./base/base";
 
 @import "./utils/colors";
 @import "./utils/mixins";
+@import "./utils/variables";
 
 @import "./components/Home";
 @import "./components/Profile";
@@ -13,6 +16,11 @@
 @import "./components/TaskSingle";
 @import "./components/TaskList";
 @import "./components/TaskContainer";
+@import "./components/Client";
+@import "./components/ClientView";
+@import "./components/LookSingle";
+
+
 
 @import "./pages/App";
 @import "./pages/index";

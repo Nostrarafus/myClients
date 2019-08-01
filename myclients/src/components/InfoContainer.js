@@ -70,7 +70,7 @@ export default class InfoContainer extends Component {
     return (
       <section className="info-collection">
 
-        <h1>{this.state.infoTitle}</h1>
+        <h5>{this.state.infoTitle}</h5>
         <input type="text"
           placeholder="Add a new Info description"
           className="add-new-info"

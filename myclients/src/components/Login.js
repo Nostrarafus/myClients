@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthServices from '../services/Services';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form'
 
 class Login extends Component {
   constructor(props) {
@@ -28,7 +29,38 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment >
+        <section className="logincontainer">
+        <h2  className="elegantshadow">Login to MyClients APP </h2>
+      <Form onSubmit={this.handleFormSubmit}>
+        <Form.Group controlId="formGroupUserName">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" placeholder="Jon Snow" name="username"
+            value={this.state.username} onChange={e => this.handleChange(e)} />
+        </Form.Group>
+        <Form.Group controlId="formGroupPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" name="password" 
+            value={this.state.password} onChange={e => this.handleChange(e)} />
+        </Form.Group>
+        <input type="submit" value="Login" />
+      </Form>
+
+      <p>Don't have account?
+            <Link to={"/signup"}> Signup</Link>
+        </p>
+        </section>
+      </React.Fragment>
+    )
+  }
+}
+
+export default Login;
+
+
+
+
+/* <div>
         <form onSubmit={this.handleFormSubmit}>
           <label>Username:</label>
           <input type="text" name="username" value={this.state.username} onChange={e => this.handleChange(e)} />
@@ -40,9 +72,45 @@ class Login extends Component {
         <p>Don't have account?
             <Link to={"/signup"}> Signup</Link>
         </p>
-      </div>
-    )
-  }
-}
+      </div>  */
 
-export default Login;
+//       <React.Fragment>
+//         <form onSubmit={this.handleFormSubmit} className="form">
+//           <div className='form__field-wrapper'>
+//             <input
+//               className='form__field-input'
+//               type='text'
+//               name='username'
+//               value={this.state.username}
+//               placeholder='Jon Snow'
+//               onChange={(e) => this.handleChange(e)}/>
+//             <label className='form__field-label' htmlFor='username'>
+//               Username
+//         </label>
+//           </div>
+//           <div className='form__field-wrapper'>
+//             <input
+//               className='form__field-input'
+//               name='password'
+//               type='password'
+//               value={this.state.password}
+//               placeholder='••••••••••'
+//               onChange={e => this.handleChange(e)} />
+//             <label className='form__field-label' htmlFor='password'>
+//               Password
+//         </label>
+//           </div>
+//           <div className='form__submit-btn-wrapper'>
+//             {/* {this.props.currentlySending ? (
+//               <LoadingButton />
+//             ) : ( */}
+//                 <input type="submit" value="Login" />
+//               {/* )} */}
+//           </div>
+//         </form>
+
+//         <p>Don't have account?
+// <Link to={"/signup"}> Signup</Link>
+//         </p>
+
+//       </React.Fragment>

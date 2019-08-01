@@ -7,6 +7,7 @@ import TaskContainer from './TaskContainer';
 import ZoomImg from './ZoomImg';
 import MyContainer from './MyPoseContainer';
 
+
 export default class Client extends Component {
   constructor() {
     super()
@@ -82,21 +83,21 @@ export default class Client extends Component {
 
     return (
       <div>
-        <h3><Link to={'/profile'}>Volver al perfil</Link></h3>
+        <h5><Link to={'/profile'}>Volver al perfil</Link></h5>
 
         {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <h1>Cliente {this.state.clientData.clientName}</h1>
+              <h3 className="retroshadow">Perfil de {this.state.clientData.clientName}</h3>
             </React.Fragment>
-            : <h3>Loading...</h3>
+            : <h3 className="">Loading...</h3>
         }
         {
           (this.state.clientData)
             ?
             <React.Fragment>
-              <MyContainer>
+             
                 <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
                   <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
                   <button type="submit">Update your {this.state.clientData.clientName} pic</button>
@@ -104,13 +105,15 @@ export default class Client extends Component {
                 <div className="clientPic">
                   {(this.state.clientData.picture) ?
                     <React.Fragment>
+                       {/* <MyContainer className={"clientPicContainer"}> */}
                       <ZoomImg src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
+                      {/* </MyContainer> */}
                     </React.Fragment>
                     : ""}
                 </div>
-              </MyContainer>
+           
             </React.Fragment>
-            : <h3>Loading...</h3>
+            : <h3 className="elegantshadow">Loading...</h3>
         }
 
         <div className="looksInClient">
@@ -118,12 +121,10 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-                <MyContainer>
                   <LookContainer
                     clientID={this.state.clientData._id}
                     looksData={this.state.clientData.looks}>
                   </LookContainer>
-                </MyContainer>
               </React.Fragment>
               : <h3>Loading...</h3>
           }
@@ -137,7 +138,7 @@ export default class Client extends Component {
                   this.state.clientData.infos.map((info, idx) => {
                     return (
                       <MyContainer key={idx}>
-                        <InfoContainer
+                        <InfoContainer className={'infoContainer'}
                           key={idx}
                           clientID={this.state.clientData._id}
                           infoData={info.infoData}
@@ -151,7 +152,7 @@ export default class Client extends Component {
                 <button onClick={() => this.addNewInfoBox()}>Add a new Infobox for your client</button>
               </React.Fragment>
 
-              : <h3>Loading...</h3>
+              : <h3 className="elegantshadow">Loading...</h3>
           }
         </div>
         <div className="taskContainer">
@@ -159,14 +160,14 @@ export default class Client extends Component {
             (this.state.clientData)
               ?
               <React.Fragment>
-                <MyContainer>
+              
                   <TaskContainer
                     taskData={this.state.clientData.tasks}
                     clientID={this.state.clientData._id}
                   />
-                </MyContainer>
+
               </React.Fragment>
-              : <h3>Loading...</h3>
+              : <h3 className="elegantshadow">Loading...</h3>
           }
         </div>
       </div>

@@ -1,7 +1,41 @@
 .clientsList{
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 150px);
+  // justify-content: space-between;
+  // grid-template-columns: repeat(auto-fit, 150px);
+  // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
+
+
+.addClientWrapper{
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 150px);
+  justify-content: space-between;
+  // grid-template-columns: repeat(auto-fit, 150px);
+  // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+
+.userPicFormWrapper{ 
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: repeat(auto-fill, 150px);
+  // justify-content: space-between;
+  // grid-template-columns: repeat(auto-fit, 150px);
+  // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+// .userPicandForm{
+//   display: grid;
+//   grid-gap: 20px;
+//   grid-template-columns: repeat(auto-fill, 150px);
+//   justify-content: space-evenly;
+//   // grid-template-columns: repeat(auto-fit, 150px);
+//   // grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+// }
+
 
 // .userPic{
 //   max-width: 200px;

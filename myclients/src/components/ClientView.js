@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
 
 export default class Clientview extends Component {
-  state= {
-      id: this.props.identificador
+  constructor(props) {
+    super(props)
+    this.state = {
+      clientview: this.props.nombre
     }
-  
+  }
+
+
 
   render() {
     return (
       <React.Fragment>
-        <h1>Cliente:{this.props.nombre}</h1>
+        <div className="clientViewWrapper">
+          <div className="clientview">
+            <div className="coolName"> {this.props.nombre}</div>
+          </div>
+          <img className="clientviewpic" src={this.props.pic} alt="" />
+        </div>
       </React.Fragment>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthServices from '../services/Services';
 import LookList from './LookList';
+import MyContainer from './MyPoseContainer';
 
 export default class LookContainer extends Component {
   constructor(props) {
@@ -72,8 +73,10 @@ export default class LookContainer extends Component {
         </form>
 
         {(this.state.looksData) ?
-          <LookList looks={this.state.looksData} />
-          : <h3>Loading...</h3>
+          <MyContainer>
+            <LookList looks={this.state.looksData} />
+          </MyContainer>
+          : <h5>Loading...</h5>
         }
 
       </section>

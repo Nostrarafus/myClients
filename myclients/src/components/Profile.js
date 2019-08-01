@@ -11,7 +11,7 @@ export default class Profile extends Component {
     this.state = {
       addClient: "",
       allClients: [],
-    //  userPhoto: {},
+      //  userPhoto: {},
       file: null,
       userData: {},
     }
@@ -97,40 +97,44 @@ export default class Profile extends Component {
 
   render() {
     //console.log(this.state.userData)
-    // console.log(this.state.allClients)  
+     console.log(this.state.allClients)  
     return (
       <div>
         <button onClick={this.props.logout}>Logout</button>
-        <h1>Bienvenido {this.state.userData.username}</h1>
-        <h2>Add a new client:</h2>
-        <form onSubmit={this.handleFormSubmit}>
-          <input type="text" name="addClient" 
-          value={this.state.addClient} 
-          onChange={(e) => this.handleClientChange(e)} />
-          <input type="submit" value="Add Client" onClick={this.showAllClients} />
-        </form>
+        <h3 className="elegantshadow">Bienvenido {this.state.userData.username}</h3>
+        <section className="addClientWrapper">
+          <h4>Add a new client:</h4>
+          <form onSubmit={this.handleFormSubmit}>
+            <input type="text" name="addClient"
+              value={this.state.addClient}
+              onChange={(e) => this.handleClientChange(e)} />
+            {/* <input type="submit" value="Add Client" onClick={this.showAllClients} /> */}
+          </form>
+        </section>
         <div className="clientsList">
           {
             this.state.allClients.map((client, idx) => {
               return <div key={idx}>
                 <Link to={`/client/` + client._id}>
-                  <Clientview nombre={client.clientName} identificador={client._id} />
+                  <Clientview nombre={client.clientName} identificador={client._id} pic={client.picture.imgPath} />
                 </Link>
               </div>
             })
           }
         </div>
-
-        <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
-          <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
-          <button type="submit">Update your profile pic</button>
-        </form>
-        <div className="userPic">
-          {(this.state.userData.picture) ? 
-          <React.Fragment>
-          <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} /> 
-          </React.Fragment>
-          : ""}
+        <div className="userPicandForm">
+        <div className="userPicFormWrapper">
+          <form onSubmit={(e) => this.handlePhotoSubmit(e)}>
+            <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
+            <button type="submit">Update your profile pic</button>
+          </form>
+        </div>
+        
+          {(this.state.userData.picture) ?
+            <React.Fragment>
+              <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
+            </React.Fragment>
+            : ""}
         </div>
 
 
