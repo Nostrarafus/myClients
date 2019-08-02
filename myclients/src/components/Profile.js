@@ -89,8 +89,6 @@ export default class Profile extends Component {
   }
 
   render() {
-    //console.log(this.state.userData)
-    console.log(this.state.allClients)
     return (
       <div>
 
@@ -128,10 +126,6 @@ export default class Profile extends Component {
           <Button type="submit" variant="outline-success">Update your profile pic</Button>
           <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
         </form>
-
-
-
-
       </div>
     )
   }
