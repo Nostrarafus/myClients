@@ -61,7 +61,7 @@ export default class Signup extends Component {
         </Form>
 
         <p>Already have account?
-          <Link to={"/login"}><p>Login</p> </Link>
+          <Link to={"/login"}><span>Login</span> </Link>
         </p>
         </section>
       </React.Fragment>

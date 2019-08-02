@@ -49,7 +49,7 @@ class Login extends Component {
       </Form>
 
       <p>Don't have account?
-            <Link to={"/signup"}> <p>Signup</p> </Link>
+            <Link to={"/signup"}> <span>Signup</span> </Link>
         </p>
         </section>
       </React.Fragment>
