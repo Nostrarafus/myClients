@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import checkbox from "../img/checkbox.png"
 import checkboxEnabled from "../img/checkbox-enabled.png"
+import Button from 'react-bootstrap/Button'
+
 
 export default class TaskSingle extends Component {
 
@@ -24,10 +26,11 @@ export default class TaskSingle extends Component {
           <path d="M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718-7.416-5.388-7.417 5.388 2.833-8.718-7.416-5.389h9.167z" /></svg>
 
         <div className="name-timestamp-wrapper">
-          <h3 className="name" title={this.props.taskData.description}>{this.props.taskData.description}</h3>
-          <button onClick={() => this.props.deleteTaskInfo(this.props.taskData._id)}>Delete</button>
+          <h5 className="name" title={this.props.taskData.description}>{this.props.taskData.description}</h5>
+          <Button onClick={() => this.props.deleteTaskInfo(this.props.taskData._id)} variant="outline-danger">Delete</Button>
+
         </div>
-      </li> 
+      </li>
     )
   }
 }

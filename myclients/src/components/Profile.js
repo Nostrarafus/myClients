@@ -93,6 +93,13 @@ export default class Profile extends Component {
     console.log(this.state.allClients)
     return (
       <div>
+
+        {(this.state.userData.picture) ?
+          <React.Fragment>
+            <ZoomImg className="userPicture" src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
+          </React.Fragment>
+          : ""}
+
         <Button className="logoutbutton" onClick={this.props.logout} variant="outline-secondary">Logout</Button>
         <h3 className="elegantshadow" id="userName">Bienvenido {this.state.userData.username}</h3>
         <section className="addClientWrapper">
@@ -122,12 +129,6 @@ export default class Profile extends Component {
           <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> <br />
         </form>
 
-
-        {(this.state.userData.picture) ?
-          <React.Fragment>
-            <ZoomImg src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
-          </React.Fragment>
-          : ""}
 
 
 

@@ -23,5 +23,13 @@ justify-content: center;
 .userPicFormWrapper{
 display: flex;
 flex-direction: column;
-align-items: start;
+align-items: flex-start;
 }
+
+.image-frame{
+  float: left;
+}
+.userPicture{
+  border-radius: 50%;
+}
+

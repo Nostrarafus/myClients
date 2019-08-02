@@ -27,7 +27,7 @@ export default class TaskContainer extends Component {
       })
   }
 
-  updateNewTaskString(e) {
+  updatenewTaskDescription(e) {
     let regexp = e.target.value
     regexp.replace(/^ +/gm, '')
     this.setState({
@@ -70,8 +70,8 @@ export default class TaskContainer extends Component {
         <input type="text"
           placeholder="Add a new task"
           className="add-new-task"
-          value={this.state.newTaskString}
-          onChange={(e) => this.updateNewTaskString(e)}
+          value={this.state.newTaskDescription}
+          onChange={(e) => this.updatenewTaskDescription(e)}
           onKeyDown={(e) => this.addNewTask(e)} />
 
         {(this.state.taskData) ?

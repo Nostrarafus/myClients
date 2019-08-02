@@ -8,6 +8,11 @@
   overflow: hidden;
 }
 
+.name-timestamp-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
 .task .done {
   --dimensions: 20px;
   background-image: url(/src/img/checkbox-enabled.png);
