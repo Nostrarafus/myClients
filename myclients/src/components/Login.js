@@ -3,6 +3,7 @@ import AuthServices from '../services/Services';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import hero from '../img/hero-laptop.jpg'
 
 class Login extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class Login extends Component {
   render() {
     return (
       <div className="formwrapper" >
+        <img className="hero-background" alt="hero" src={hero}/>
         <h2  className="elegantshadow">Login to MyClients APP </h2>
         <section className="loginBox">
       <Form onSubmit={this.handleFormSubmit}>
@@ -44,7 +46,7 @@ class Login extends Component {
           <Form.Control type="password" placeholder="Password" name="password" 
             value={this.state.password} onChange={e => this.handleChange(e)} />
         </Form.Group>
-        <Button type="submit" variant="outline-primary">Login</Button>
+        <button type="submit" className="login-button">Login</button>
 
       </Form>
 

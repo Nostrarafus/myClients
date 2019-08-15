@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import AuthServices from '../services/Services'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import hero from '../img/hero-laptop.jpg'
 
 export default class Signup extends Component {
   constructor(props) {
@@ -44,6 +45,8 @@ export default class Signup extends Component {
   render() {
     return (
       <React.Fragment>
+        <div className="formwrapper">
+        <img className="hero-background" alt="hero" src={hero}/>
          <h2  className="elegantshadow">Signup to MyClients APP </h2>
          <section className="loginBox">
         <Form onSubmit={this.handleFormSubmit}>
@@ -57,13 +60,14 @@ export default class Signup extends Component {
             <Form.Control type="password" placeholder="Password" name="password"
               value={this.state.password} onChange={e => this.handleChange(e)} />
           </Form.Group>
-          <Button type="submit" variant="outline-primary">Signup</Button>
+          <Button className="login-button" type="submit" variant="outline-secondary">Signup</Button>
         </Form>
 
         <p>Already have account?
           <Link to={"/login"}><span>Login</span> </Link>
         </p>
         </section>
+        </div>
       </React.Fragment>
     )
   }
