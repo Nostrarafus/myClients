@@ -60,7 +60,7 @@ export default class Signup extends Component {
             <Form.Control type="password" placeholder="Password" name="password"
               value={this.state.password} onChange={e => this.handleChange(e)} />
           </Form.Group>
-          <Button className="login-button" type="submit" variant="outline-secondary">Signup</Button>
+          <button className="login-button" type="submit" >Signup</button>
         </Form>
 
         <p>Already have account?
