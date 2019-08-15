@@ -30,7 +30,7 @@ class Login extends Component {
 
   render() {
     return (
-      <React.Fragment >
+      <div className="formwrapper" >
         <h2  className="elegantshadow">Login to MyClients APP </h2>
         <section className="loginBox">
       <Form onSubmit={this.handleFormSubmit}>
@@ -52,7 +52,7 @@ class Login extends Component {
             <Link to={"/signup"}> <span>Signup</span> </Link>
         </p>
         </section>
-      </React.Fragment>
+      </div>
     )
   }
 }

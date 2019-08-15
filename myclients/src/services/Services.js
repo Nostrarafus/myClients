@@ -88,6 +88,16 @@ export default class AuthServices {
       .catch(errHandler);
   }
 
+  addNewLookFromCamera = (newLook, clientID, lookPicCam) => {
+    console.log(lookPicCam)
+    const formData = new FormData();
+    formData.append("photo", lookPicCam)
+    formData.append("newLook", newLook)
+    return this.service.post(`/client/${clientID}/addNewLookFromCamera`, formData)
+      .then(response => response.data)
+      .catch(errHandler);
+  }
+
   addNewInfo = (newInfo, clientID, infoTitle) => {
     return this.service.post(`/client/${clientID}/addNewInfo`, { newInfo, infoTitle })
       .then(response => response.data)

@@ -71,9 +71,7 @@ class App extends Component {
             <Route exact path='/' render={() => <Home />} />
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser} />} />
-            {/* <Route render={() => { return <Redirect to="/login" /> }} /> */}
           </Switch>
-
         </React.Fragment>
       )
     }

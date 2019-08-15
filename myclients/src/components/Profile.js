@@ -110,11 +110,18 @@ export default class Profile extends Component {
           </form>
         </section>
         <div className="clientsList">
-          {
+          {(this.state.allClients.picture)?
             this.state.allClients.map((client, idx) => {
               return <div key={idx}>
                 <Link to={`/client/` + client._id}>
                   <Clientview nombre={client.clientName} identificador={client._id} pic={client.picture.imgPath} />
+                </Link>
+              </div>
+            })
+            : this.state.allClients.map((client, idx) => {
+              return <div key={idx}>
+                <Link to={`/client/` + client._id}>
+                  <Clientview nombre={client.clientName} identificador={client._id} />
                 </Link>
               </div>
             })

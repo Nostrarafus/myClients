@@ -17,7 +17,11 @@ export default class Clientview extends Component {
           <div className="clientview">
             <div className="coolName"> {this.props.nombre}</div>
           </div>
-          <img className="clientviewpic" src={this.props.pic} alt="" />
+          {
+            (this.props.pic)?
+            <img className="clientviewpic" src={this.props.pic} alt="" />
+            :""
+          }
         </div>
       </React.Fragment>
     )
