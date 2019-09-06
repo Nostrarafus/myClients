@@ -53,7 +53,7 @@ export default class LookContainer extends Component {
     e.preventDefault();
     const newLook = this.state.newLookDescription
     const clientID = this.state.clientID
-    const lookPicCam = this.refs.previewPic
+    const lookPicCam = this.state.newLookFileFromCamera
     this.service.addNewLookFromCamera(newLook, clientID, lookPicCam)
       .then(response => console.log(response))
   }
@@ -103,7 +103,7 @@ export default class LookContainer extends Component {
   }
 
   render() {
-    console.log(this.refs)
+    // console.log(this.state.newLookFileFromCamera)
     return (
       <section className="looks-collection">
         {

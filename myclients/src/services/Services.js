@@ -79,14 +79,11 @@ export default class AuthServices {
   }
 
   addNewLook = (newLook, clientID, file) => {
-    console.log(newLook, clientID)
-    const formData = new FormData();
-    formData.append("photo", file)
-    formData.append("newLook", newLook)
-    return this.service.post(`/client/${clientID}/addNewLook`, formData)
+    console.log(file)
+    return this.service.post(`/client/${clientID}/addNewLook`, { newLook, file })
       .then(response => response.data)
       .catch(errHandler);
-  }
+  } 
 
   addNewLookFromCamera = (newLook, clientID, lookPicCam) => {
     console.log(lookPicCam)
@@ -128,7 +125,7 @@ export default class AuthServices {
       .then(response => response.data)
       .catch(errHandler);
   }
-  deleteLook = (lookID,clientID) => {
+  deleteLook = (lookID, clientID) => {
     return this.service.post(`/deleteLook`, { lookID, clientID })
       .then(response => response.data)
       .catch(errHandler);

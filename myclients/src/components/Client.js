@@ -6,7 +6,7 @@ import LookContainer from './LookContainer';
 import InfoContainer from './InfoContainer';
 import TaskContainer from './TaskContainer';
 import ZoomImg from './ZoomImg';
-import MyContainer from './MyPoseContainer';
+import MyContainer from './MyContainer';
 import Button from 'react-bootstrap/Button'
 
 
@@ -85,44 +85,45 @@ export default class Client extends Component {
 
     return (
       <div>
-        <h5><Link to={'/profile'}>Volver a tu perfil</Link></h5>
-<div className="client-name-pic-wrapper">
-        {
-          (this.state.clientData)
-            ?
-            <React.Fragment>
-              <h3 className="deepshadow">Perfil de {this.state.clientData.clientName}</h3>
-            </React.Fragment>
-            : <h3 className="">Loading...</h3>
-        }
-        {
-          (this.state.clientData)
-            ?
-            <React.Fragment>
-              <div>
-                {(this.state.clientData.picture) ?
-                  <React.Fragment>
-                    {/* <MyContainer className={"clientPicContainer"}> */}
-                    <ZoomImg  className="clientPic" src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
-                    {/* </MyContainer> */}
-                  </React.Fragment>
-                  : ""}
-              </div>
 
-            </React.Fragment>
-            : <h3 className="elegantshadow">Loading...</h3>
-        }
+        <h5><Link to={'/profile'}>Volver a tu perfil</Link></h5>
+        <div className="client-name-pic-wrapper">
+          {
+            (this.state.clientData)
+              ?
+              <React.Fragment>
+                <h3 className="deepshadow">Perfil de {this.state.clientData.clientName}</h3>
+              </React.Fragment>
+              : <h3 className="">Loading...</h3>
+          }
+          {
+            (this.state.clientData)
+              ?
+              <React.Fragment>
+                <div>
+                  {(this.state.clientData.picture) ?
+                    <React.Fragment>
+                      {/* <MyContainer className={"clientPicContainer"}> */}
+                      <ZoomImg className="clientPic" src={this.state.clientData.picture.imgPath} alt={this.state.clientData.picture.imgName} />
+                      {/* </MyContainer> */}
+                    </React.Fragment>
+                    : ""}
+                </div>
+
+              </React.Fragment>
+              : <h3 className="elegantshadow">Loading...</h3>
+          }
         </div>
         {
-           (this.state.clientData)
-           ?
-           <React.Fragment> 
+          (this.state.clientData)
+            ?
+            <React.Fragment>
               <form onSubmit={(e) => this.handlePhotoSubmit(e)} className="clientPicForm">
-                <input type="file" onChange={(e) => this.handlePhotoChange(e)} /> 
+                <input type="file" onChange={(e) => this.handlePhotoChange(e)} />
                 <Button type="submit" variant="outline-info">Update your {this.state.clientData.clientName} pic</Button>
               </form>
-           </React.Fragment>
-        :<h3>Loading...</h3>
+            </React.Fragment>
+            : <h3>Loading...</h3>
         }
 
         <div className="looksInClient">
@@ -141,27 +142,43 @@ export default class Client extends Component {
         </div>
         <div className="infosInClient">
           {
+
             (this.state.clientData)
               ?
               <React.Fragment>
-                 <div className="col-lg-12 text-center">
-                {
-                  this.state.clientData.infos.map((info, idx) => {
-                    return (
-                      <MyContainer key={idx}>
-                        <InfoContainer className={'infoContainer'}
-                          key={idx}
-                          clientID={this.state.clientData._id}
-                          infoData={info.infoData}
-                          infoTitle={info.infoTitle}
-                          infoID={info._id} />
-                      </MyContainer>
-                    )
-                  })
-                }
+                <div className="col-lg-12 text-center">
+                  {
+
+                    this.state.clientData.infos.map((info, idx) => {
+                      let width = window.innerWidth
+                      if (width > 768) {
+                        return (
+                          <MyContainer key={idx}>
+                            <InfoContainer className={'infoContainer'}
+                              key={idx}
+                              clientID={this.state.clientData._id}
+                              infoData={info.infoData}
+                              infoTitle={info.infoTitle}
+                              infoID={info._id} />
+                          </MyContainer>
+                        )
+                      }
+                      else {
+                        return (
+                          <InfoContainer className={'infoContainer'}
+                            key={idx}
+                            clientID={this.state.clientData._id}
+                            infoData={info.infoData}
+                            infoTitle={info.infoTitle}
+                            infoID={info._id} />
+                        )
+                      }
+
+                    })
+                  }
                 </div>
                 <div className="col-lg-12 text-center">
-                <Button  onClick={() => this.addNewInfoBox()} type="submit" variant="outline-info">Add a new Infobox for your client</Button>
+                  <Button onClick={() => this.addNewInfoBox()} type="submit" variant="outline-info">Add a new Infobox for your client</Button>
                 </div>
               </React.Fragment>
 
