@@ -89,9 +89,9 @@ export default class Profile extends Component {
   }
 
   render() {
+    console.log(this.state.file)
     return (
-      <div>
-
+      <div className="profile-wrapper">
         {(this.state.userData.picture) ?
           <React.Fragment>
             <ZoomImg className="userPicture" src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
@@ -110,7 +110,7 @@ export default class Profile extends Component {
           </form>
         </section>
         <div className="clientsList">
-          {(this.state.allClients.picture)?
+          {(this.state.allClients.picture) ?
             this.state.allClients.map((client, idx) => {
               return <div key={idx}>
                 <Link to={`/client/` + client._id}>
@@ -127,7 +127,6 @@ export default class Profile extends Component {
             })
           }
         </div>
-
 
         <form className="userPicFormWrapper" onSubmit={(e) => this.handlePhotoSubmit(e)}>
           <Button type="submit" variant="outline-success">Update your profile pic</Button>

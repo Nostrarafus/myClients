@@ -21,6 +21,7 @@ export default class LookContainer extends Component {
   }
 
   updateNewLookDescription(e) {
+    e.preventDefault();
     let regexp = e.target.value
     regexp.replace(/^ +/gm, '')
     this.setState({
@@ -94,6 +95,7 @@ export default class LookContainer extends Component {
   }
 
   handlePhotoChange(e) {
+    e.preventDefault();
     this.setState({
       ...this.state,
       newLookFile: e.target.files[0]
@@ -101,6 +103,7 @@ export default class LookContainer extends Component {
   }
 
   render() {
+    console.log(this.refs)
     return (
       <section className="looks-collection">
         {
@@ -118,12 +121,11 @@ export default class LookContainer extends Component {
             onChange={(e) => this.updateNewLookDescription(e)}
           />
           <Button variant="outline-primary" onClick={() => this.showCamera()}>Take your look picture</Button>
-          <Button type="file" variant="outline-primary"
-            onChange={(e) => this.handlePhotoChange(e)}>choose your look pic</Button>
+          <input type="file" placeholder="Choose your cool pic"
+            onChange={(e) => this.handlePhotoChange(e)} />
           <Button type="submit" variant="outline-success">add your cool look</Button>
 
         </form>
-
         {
           (this.state.newLookFileFromCamera) ?
             <div className="previewPicWrapper">

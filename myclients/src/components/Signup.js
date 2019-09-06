@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthServices from '../services/Services'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import hero from '../img/hero-laptop.jpg'
+import hero from '../img/hero-laptop.jpg' 
 
 export default class Signup extends Component {
   constructor(props) {
