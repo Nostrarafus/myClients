@@ -17,7 +17,11 @@ export default class Client extends Component {
       clientData: null,
       file: null
     }
+    this.width = window.innerWidth
     this.service = new AuthServices()
+    this.resolution = ""
+    if (this.width > 768) this.resolution = "pc"
+    else { this.resolution = "phone" }
   }
 
 
@@ -82,7 +86,7 @@ export default class Client extends Component {
 
 
   render() {
-
+    console.log(this.resolution)
     return (
       <div>
 
@@ -142,16 +146,15 @@ export default class Client extends Component {
         </div>
         <div className="infosInClient">
           {
-
             (this.state.clientData)
               ?
               <React.Fragment>
-                <div className="col-lg-12 text-center">
+                <div className={this.resolution}>
                   {
 
                     this.state.clientData.infos.map((info, idx) => {
-                      let width = window.innerWidth
-                      if (width > 768) {
+
+                      if (this.width > 768) {
                         return (
                           <MyContainer key={idx}>
                             <InfoContainer className={'infoContainer'}
@@ -165,7 +168,7 @@ export default class Client extends Component {
                       }
                       else {
                         return (
-                          <InfoContainer className={'infoContainer'}
+                          <InfoContainer className={'infoContainerforPhone'}
                             key={idx}
                             clientID={this.state.clientData._id}
                             infoData={info.infoData}
