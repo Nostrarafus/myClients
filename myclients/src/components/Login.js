@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import AuthServices from '../services/Services';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
-
 import hero from '../img/hero-laptop.jpg'
 
 class Login extends Component {

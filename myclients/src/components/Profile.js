@@ -4,6 +4,7 @@ import Clientview from './ClientView';
 import { Link } from 'react-router-dom';
 import ZoomImg from './ZoomImg'
 import Button from 'react-bootstrap/Button'
+import coolbackground from '../img/cool-background.png'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -92,6 +93,7 @@ export default class Profile extends Component {
     console.log(this.state.file)
     return (
       <div className="profile-wrapper">
+        <img className="cool-background" alt="cool-background" src={coolbackground}/> 
         {(this.state.userData.picture) ?
           <React.Fragment>
             <ZoomImg className="userPicture" src={this.state.userData.picture.imgPath} alt={this.state.userData.picture.imgName} />
