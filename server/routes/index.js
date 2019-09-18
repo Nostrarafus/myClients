@@ -97,7 +97,26 @@ router.post(`/client/:id/addClientPic`, uploadCloud.single('photo'), (req, res, 
 });
 
 router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, next) => {
-  const imgPath = req.file
+  const imgPath = req.file.url
+  console.log(imgPath)
+  const look = req.body.newLook
+  const client = req.params.id
+  console.log(look, client)
+  Looks.create({
+    client: client,
+    lookDescription: look,
+    picture: imgPath,
+  })
+    .then((look) => {
+      Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
+        .populate("looks")
+        .then((clientData) => { res.json(clientData) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+})
+
+router.post(`/client/:id/addNewLookFromCamera`, uploadCloud.single('photo'), (req, res, next) => {
+  const imgPath = req
   console.log(imgPath)
   // const look = req.body.newLook
   // const client = req.params.id
@@ -112,27 +131,9 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
   //       .populate("looks")
   //       .then((clientData) => { res.json(clientData) })
   //       .catch(err => console.log("Hubo un error!", err))
-  //   }).catch(err => console.log("Hubo un error!", err))
+  //   })
 })
-
-router.post(`/client/:id/addNewLookFromCamera`, uploadCloud.single('photo'), (req, res, next) => {
-  const clientID = req.params.id
-  const imgPath = req.file
-  console.log(imgPath)
-  const imgName = req.body.newLook
-  Looks.create({
-    client: clientID,
-    lookDescription: imgName,
-    picture: imgPath,
-  })
-    .then((look) => {
-      Client.findOneAndUpdate({ _id: clientID }, { $push: { looks: look._id } }, { new: true })
-        .populate("looks")
-        .then((clientData) => { res.json(clientData) })
-        .catch(err => console.log("Hubo un error!", err))
-    }).catch(err => console.log("Hubo un error!", err))
-
-})
+// .catch(err => console.log("Hubo un error!", err))
 
 router.post('/deleteInfo', (req, res, next) => {
   const info = req.body.info

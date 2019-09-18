@@ -79,15 +79,21 @@ export default class AuthServices {
   }
 
   addNewLook = (newLook, clientID, file) => {
-    console.log(file)
-    return this.service.post(`/client/${clientID}/addNewLook`, { newLook, file })
+    console.log(newLook, clientID)
+    const formData = new FormData();
+    formData.append("photo", file)
+    formData.append("newLook", newLook)
+    return this.service.post(`/client/${clientID}/addNewLook`, formData)
       .then(response => response.data)
       .catch(errHandler);
   }
 
   addNewLookFromCamera = (newLook, clientID, file) => {
-    console.log(file)
-    return this.service.post(`/client/${clientID}/addNewLookFromCamera`, { newLook, file })
+    console.log(newLook, clientID)
+    const formData = new FormData();
+    formData.append("photo", file)
+    formData.append("newLook", newLook)
+    return this.service.post(`/client/${clientID}/addNewLookFromCamera`, formData)
       .then(response => response.data)
       .catch(errHandler);
   }
