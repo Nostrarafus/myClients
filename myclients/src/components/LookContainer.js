@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AuthServices from '../services/Services';
 import LookList from './LookList';
-import Camera from 'react-html5-camera-photo';
+import Camera, { IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import Button from 'react-bootstrap/Button'
 import ZoomImg from './ZoomImg';
@@ -109,7 +109,8 @@ export default class LookContainer extends Component {
         {
           (this.state.showCamera) ?
             <Camera
-              onTakePhoto={(dataUri) => { this.onTakePhoto(dataUri); }}
+            onTakePhoto={(dataUri) => { this.onTakePhoto(dataUri); }}
+            imageType={IMAGE_TYPES.JPG}
             />
             : ""
         }

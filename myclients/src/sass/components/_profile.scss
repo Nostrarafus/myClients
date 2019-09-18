@@ -14,6 +14,7 @@ position: relative;
     // background: linear-gradient(to right, teal, #648880 85%, teal);
     border-radius: 6px;
     height: 100vh;
+
     position: relative;
 }
 
@@ -21,11 +22,13 @@ position: relative;
   position: absolute;
   background-repeat: no-repeat;
   height: 100vh;
+  width: 100vw;
 }
 
 .logoutbutton{
   float: right;
   position: relative;
+  z-index: 1;
 }
 .profile-hero{
   position: relative;

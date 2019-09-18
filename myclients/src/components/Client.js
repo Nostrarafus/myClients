@@ -20,8 +20,8 @@ export default class Client extends Component {
     this.width = window.innerWidth
     this.service = new AuthServices()
     this.resolution = ""
-    if (this.width > 768) this.resolution = "pc"
-    else { this.resolution = "phone" }
+    if (this.width > 736) {this.resolution = "pc"}
+    else if (this.width < 736) { this.resolution = "phone" }
   }
 
 
@@ -86,7 +86,7 @@ export default class Client extends Component {
 
 
   render() {
-    console.log(this.resolution)
+    console.log(this.width)
     return (
       <div>
 
@@ -153,8 +153,7 @@ export default class Client extends Component {
                   {
 
                     this.state.clientData.infos.map((info, idx) => {
-
-                      if (this.width > 768) {
+                      if (this.width > 736) {
                         return (
                           <MyContainer key={idx}>
                             <InfoContainer className={'infoContainer'}
@@ -166,7 +165,7 @@ export default class Client extends Component {
                           </MyContainer>
                         )
                       }
-                      else {
+                      else if(this.width < 736){
                         return (
                           <InfoContainer className={'infoContainerforPhone'}
                             key={idx}

@@ -14,7 +14,6 @@ var storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: 'myClients', 
   allowedFormats: ['jpg', 'png'],
-  params: { resource_type: "raw" },
  
   filename: function (req, file, cb) {
     cb(null, file.originalname); 

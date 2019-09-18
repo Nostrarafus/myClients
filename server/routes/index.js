@@ -114,25 +114,23 @@ router.post(`/client/:id/addNewLook`, uploadCloud.single('photo'), (req, res, ne
     }).catch(err => console.log("Hubo un error!", err))
 })
 
-router.post(`/client/:id/addNewLookFromCamera`, (req, res, next) => {
-  console.log(req.body.newLook)
-  uploadCloud(req.body.newLook)
-  console.log("subida")
-  // const imgPath = req.file.url
-  // const look = req.body.newLook
-  // const client = req.params.id
-  // console.log(look, client)
-  // Looks.create({
-  //   client: client,
-  //   lookDescription: look,
-  //   picture: imgPath,
-  // })
-  //   .then((look) => {
-  //     Client.findOneAndUpdate({ _id: client }, { $push: { looks: look._id } }, { new: true })
-  //       .populate("looks")
-  //       .then((clientData) => { res.json(clientData) })
-  //       .catch(err => console.log("Hubo un error!", err))
-  //   }).catch(err => console.log("Hubo un error!", err))
+router.post(`/client/:id/addNewLookFromCamera`, uploadCloud.single('photo'), (req, res, next) => {
+  const clientID = req.params.id
+  const imgPath = req.file
+  console.log(imgPath)
+  const imgName = req.body.newLook
+  Looks.create({
+    client: clientID,
+    lookDescription: imgName,
+    picture: imgPath,
+  })
+    .then((look) => {
+      Client.findOneAndUpdate({ _id: clientID }, { $push: { looks: look._id } }, { new: true })
+        .populate("looks")
+        .then((clientData) => { res.json(clientData) })
+        .catch(err => console.log("Hubo un error!", err))
+    }).catch(err => console.log("Hubo un error!", err))
+
 })
 
 router.post('/deleteInfo', (req, res, next) => {
@@ -167,10 +165,6 @@ router.post('/deleteTaskInfo', (req, res, next) => {
         .catch(err => console.log("Hubo un error!", err))
     }).catch(err => console.log("Hubo un error!", err))
 });
-
-
-
-
 
 router.post(`/addTask`, (req, res, next) => {
   const task = req.body.newTask
