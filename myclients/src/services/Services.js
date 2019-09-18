@@ -87,14 +87,7 @@ export default class AuthServices {
 
   addNewLookFromCamera = (newLook, clientID, file) => {
     console.log(file)
-    const formData = new FormData();
-    formData.append("photo", file)
-    formData.append("newLook", newLook)
-    return this.service.post(`/client/${clientID}/addNewLookFromCamera`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    return this.service.post(`/client/${clientID}/addNewLookFromCamera`, { newLook, file })
       .then(response => response.data)
       .catch(errHandler);
   }
